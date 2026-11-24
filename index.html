@@ -314,6 +314,33 @@ section > .wrap{position:relative;z-index:1}
 .f-note span{color:#8b91a3;font-size:12px}
 @keyframes notein{0%,8%{transform:translateY(12px);opacity:0}18%,85%{transform:none;opacity:.8}100%{opacity:0}}
 @media (max-width:900px){.frag{display:none}}
+/* multi-level menu */
+.dd{position:relative}
+.dd-btn{font:inherit;color:var(--muted);background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.dd-btn:hover,.dd.open .dd-btn{color:var(--fg)}
+.dd-caret{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .25s}
+.dd.open .dd-caret{transform:rotate(180deg)}
+.dd-panel{position:absolute;left:50%;top:100%;padding-top:18px;width:620px;transform:translate(-50%,8px);opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s;z-index:40}
+.dd.open .dd-panel{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:10px;border-radius:20px;background:#14161d;border:1px solid var(--line);box-shadow:0 30px 60px -20px #000}
+.dd-grid > .dd-item:last-child{grid-column:1 / -1}
+.dd-item{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:12px;text-decoration:none;color:var(--fg);transition:background .2s}
+.dd-item:hover,.dd-item:focus-visible{background:color-mix(in srgb,var(--ic) 14%,transparent)}
+.dd-ic{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--ic)}
+.dd-ic svg{width:19px;height:19px;stroke:#111318;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dd-item b{display:block;font-size:14px;font-weight:600}
+.dd-item small{display:block;font-size:12px;color:var(--muted)}
+.dd-all{display:block;margin-top:6px;padding:10px 14px;border-radius:14px;background:#14161d;border:1px solid var(--line);font-size:13px;color:var(--muted);text-decoration:none;text-align:center}
+.dd-all:hover{color:var(--fg)}
+.m-sub{border-bottom:1px solid var(--line)}
+.m-sub summary{list-style:none;cursor:pointer;font:600 22px var(--font-display);letter-spacing:-.02em;padding:12px 0;display:flex;justify-content:space-between;align-items:center}
+.m-sub summary::-webkit-details-marker{display:none}
+.m-sub summary .dd-caret{width:16px;height:16px}
+.m-sub[open] summary .dd-caret{transform:rotate(180deg)}
+.m-sub-list{display:grid;gap:2px;padding:0 0 12px}
+.m-item{display:flex!important;gap:12px;align-items:center;padding:8px 4px!important;border:0!important;font:500 16px var(--font-body)!important;text-decoration:none}
+.m-item small{display:block;font:400 12px var(--font-body)!important;color:var(--muted)!important;background:none!important;padding:0!important}
+.m-item .dd-ic{width:34px;height:34px}
 /* revika promo */
 .promo{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;background:var(--sun);color:var(--ink);border-radius:32px;padding:clamp(28px,5vw,64px);text-decoration:none;position:relative;overflow:hidden}
 .promo > *{min-width:0;position:relative}
@@ -444,9 +471,9 @@ textarea{min-height:110px;resize:vertical}
 .chips input:focus-visible + label{outline:2px solid var(--accent);outline-offset:2px}
 .note{font-size:14px;color:var(--mint);min-height:1.4em;margin:0}
 
-footer{border-top:1px solid var(--line);padding-block:40px 0;color:var(--muted);font-size:14px;overflow:hidden}
+footer{border-top:1px solid var(--line);padding-block:40px 24px;color:var(--muted);font-size:14px;overflow:hidden}
 footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
-.wordmark{font-family:var(--font-display);font-weight:800;font-size:clamp(64px,17vw,240px);letter-spacing:-.06em;line-height:.8;margin:56px 0 -.08em;user-select:none;white-space:nowrap;background:linear-gradient(90deg,var(--accent),var(--pink),var(--sun),var(--mint),var(--accent));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 10s linear infinite;opacity:.9}
+.wordmark{font-family:var(--font-display);font-weight:800;font-size:clamp(64px,17vw,240px);letter-spacing:-.05em;line-height:1.15;margin:32px 0 0;padding:.05em .06em .12em 0;user-select:none;white-space:nowrap;background:linear-gradient(90deg,var(--accent),var(--pink),var(--sun),var(--mint),var(--accent));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 10s linear infinite;opacity:.9}
 
 /* entrance + scroll (transform only; content always visible) */
 .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
@@ -590,7 +617,7 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
   <div class="wrap">
     <a class="logo" href="#top" aria-label="itsme — на главную"><span class="lg-its">its</span><span class="lg-me">me</span><span class="lg-caret" aria-hidden="true"></span></a>
     <nav class="nav" aria-label="Основное меню">
-      <a href="#services">Услуги</a>
+      <div class="dd" id="dd-svc"><button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-panel">Услуги <svg class="dd-caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button><div class="dd-panel" id="dd-panel"><div class="dd-grid"><a class="dd-item" href="web.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span><span><b>Сайты под ключ</b><small>Лендинги и корпоративные сайты</small></span></a><a class="dd-item" href="shop.html" style="--ic:#ff6fa3"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 9h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span><span><b>Интернет-магазины</b><small>Каталог, корзина, оплата</small></span></a><a class="dd-item" href="crm.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 17l-3-3"/></svg></span><span><b>CRM-системы</b><small>Bitrix24, amoCRM, свои CRM</small></span></a><a class="dd-item" href="accounting.html" style="--ic:#3fe0b0"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h8M8 17h5"/></svg></span><span><b>Подключение бухгалтерии</b><small>Обмен с 1С</small></span></a><a class="dd-item" href="bots.html" style="--ic:#b79bff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 7V4M9 12h.01M15 12h.01"/></svg></span><span><b>Чат-боты</b><small>Telegram, Viber, чат на сайте</small></span></a><a class="dd-item" href="seo.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span><b>SEO и продвижение</b><small>Поиск, аналитика, реклама</small></span></a><a class="dd-item" href="design.html" style="--ic:#ff6fa3"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z"/></svg></span><span><b>UI/UX дизайн</b><small>Figma, фирменный стиль</small></span></a><a class="dd-item" href="ai.html" style="--ic:#ff6fa3"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/></svg></span><span><b>ИИ-сайты</b><small>Сайт $150 · магазин $300</small></span></a><a class="dd-item" href="reviews.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span><b>Revika</b><small>Отзывы с карт на вашем сайте</small></span></a></div><a class="dd-all" href="#services">Все услуги на главной →</a></div></div>
       <a href="#cases">Кейсы</a>
       <a href="#why">Почему мы</a>
       <a href="blog.html">Блог</a>
@@ -603,7 +630,7 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
     </div>
   </div>
   <nav class="mnav" id="mnav" aria-label="Мобильное меню" hidden>
-    <a href="#services">Услуги</a>
+    <details class="m-sub"><summary>Услуги <svg class="dd-caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></summary><div class="m-sub-list"><a class="m-item" href="web.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span><span><b>Сайты под ключ</b><small>Лендинги и корпоративные сайты</small></span></a><a class="m-item" href="shop.html" style="--ic:#ff6fa3"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 9h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span><span><b>Интернет-магазины</b><small>Каталог, корзина, оплата</small></span></a><a class="m-item" href="crm.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 17l-3-3"/></svg></span><span><b>CRM-системы</b><small>Bitrix24, amoCRM, свои CRM</small></span></a><a class="m-item" href="accounting.html" style="--ic:#3fe0b0"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h8M8 17h5"/></svg></span><span><b>Подключение бухгалтерии</b><small>Обмен с 1С</small></span></a><a class="m-item" href="bots.html" style="--ic:#b79bff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 7V4M9 12h.01M15 12h.01"/></svg></span><span><b>Чат-боты</b><small>Telegram, Viber, чат на сайте</small></span></a><a class="m-item" href="seo.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span><b>SEO и продвижение</b><small>Поиск, аналитика, реклама</small></span></a><a class="m-item" href="design.html" style="--ic:#ff6fa3"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z"/></svg></span><span><b>UI/UX дизайн</b><small>Figma, фирменный стиль</small></span></a><a class="m-item" href="ai.html" style="--ic:#ff6fa3"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/></svg></span><span><b>ИИ-сайты</b><small>Сайт $150 · магазин $300</small></span></a><a class="m-item" href="reviews.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span><b>Revika</b><small>Отзывы с карт на вашем сайте</small></span></a></div></details>
     <a href="#cases">Кейсы</a>
     <a href="#ai">ИИ-сайты <small>от $150</small></a>
     <a href="#why">Почему мы</a>
@@ -718,63 +745,63 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
       </div>
       <div class="swipe-hint">Листайте</div>
       <div class="services">
-        <a class="svc reveal" data-svc="site" href="#contact" style="--c:var(--accent)">
+        <a class="svc reveal" href="web.html" style="--c:var(--accent)">
           <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg></div>
           <h3>Сайты под ключ</h3>
           <p>Лендинги, корпоративные сайты и визитки. От структуры и текстов до запуска.</p>
           <div class="tags"><span class="tag">лендинг</span><span class="tag">корпоративный</span></div>
           <span class="open-hint">Подробнее <span>→</span></span>
         </a>
-        <a class="svc reveal" data-svc="shop" href="#contact" style="--c:var(--pink)">
+        <a class="svc reveal" href="shop.html" style="--c:var(--pink)">
           <div class="ico"><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 9h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/><circle cx="9" cy="20" r="1"/><circle cx="16" cy="20" r="1"/></svg></div>
           <h3>Интернет-магазины</h3>
           <p>Каталог, корзина, онлайн-оплата и доставка.</p>
           <div class="tags"><span class="tag">каталог</span><span class="tag">оплата</span></div>
           <span class="open-hint">Подробнее <span>→</span></span>
         </a>
-        <a class="svc reveal" data-svc="crm" href="#contact" style="--c:var(--sun)">
+        <a class="svc reveal" href="crm.html" style="--c:var(--sun)">
           <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg></div>
           <h3>CRM-системы</h3>
           <p>Заявки с сайта, мессенджеров и звонков в одном окне. Ни один клиент не теряется.</p>
           <div class="tags"><span class="tag">Bitrix24</span><span class="tag">amoCRM</span></div>
           <span class="open-hint">Подробнее <span>→</span></span>
         </a>
-        <a class="svc reveal" data-svc="acc" href="#contact" style="--c:var(--mint)">
+        <a class="svc reveal" href="accounting.html" style="--c:var(--mint)">
           <div class="ico"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M8 18h8"/></svg></div>
           <h3>Подключение бухгалтерии</h3>
           <p>Связываем сайт и CRM с 1С. Заказы, остатки и счета обновляются сами.</p>
           <div class="tags"><span class="tag">1С</span><span class="tag">остатки</span></div>
           <span class="open-hint">Подробнее <span>→</span></span>
         </a>
-        <a class="svc reveal" data-svc="bot" href="#contact" style="--c:var(--lilac)">
+        <a class="svc reveal" href="bots.html" style="--c:var(--lilac)">
           <div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 7V4M9 12h.01M15 12h.01M9.5 15.5h5"/></svg></div>
           <h3>Чат-боты</h3>
           <p>Боты в Telegram, Viber и на сайте. Отвечают и принимают заказы круглосуточно.</p>
           <div class="tags"><span class="tag">Telegram</span><span class="tag">Viber</span></div>
           <span class="open-hint">Подробнее <span>→</span></span>
         </a>
-        <a class="svc reveal" data-svc="seo" href="#contact" style="--c:var(--accent)">
+        <a class="svc reveal" href="seo.html" style="--c:var(--accent)">
           <div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5M8.5 12.5l2-2 1.5 1.5 2.5-3"/></svg></div>
           <h3>SEO и продвижение</h3>
           <p>Выводим сайт в поиск Яндекса и Google, настраиваем аналитику и рекламу.</p>
           <div class="tags"><span class="tag">SEO</span><span class="tag">Метрика</span></div>
           <span class="open-hint">Подробнее <span>→</span></span>
         </a>
-        <a class="svc reveal" data-svc="ux" href="#contact" style="--c:var(--pink)">
+        <a class="svc reveal" href="design.html" style="--c:var(--pink)">
           <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z"/><path d="M5 20h14"/></svg></div>
           <h3>UI/UX дизайн</h3>
           <p>Прототипы и дизайн в Figma. Продумываем путь клиента до заявки.</p>
           <div class="tags"><span class="tag">Figma</span><span class="tag">прототип</span></div>
           <span class="open-hint">Подробнее <span>→</span></span>
         </a>
-        <a class="svc svc-ai reveal" href="#ai" style="--c:var(--pink)">
+        <a class="svc svc-ai reveal" href="ai.html" style="--c:var(--pink)">
           <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></div>
           <h3>ИИ-сайты <span class="new">new</span></h3>
           <p>Быстро и недорого: картинки делает ChatGPT, сайт собирает Claude, мы проверяем и запускаем.</p>
           <div class="tags"><span class="tag">сайт $150</span><span class="tag">магазин $300</span></div>
-          <span class="open-hint">Смотреть тарифы <span>→</span></span>
+          <span class="open-hint">Подробнее <span>→</span></span>
         </a>
-        <a class="svc reveal" data-svc="revika" href="reviews.html" style="--c:var(--sun)">
+        <a class="svc reveal" href="reviews.html" style="--c:var(--sun)">
           <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M12 8l1 2 2 .3-1.5 1.4.4 2.1-1.9-1-1.9 1 .4-2.1L9 10.3l2-.3z"/></svg></div>
           <h3>Revika</h3>
           <p>Наш сервис: настоящие отзывы с Яндекс Карт, Google и 2ГИС на вашем сайте.</p>
@@ -1125,7 +1152,7 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.addEventListener('pointerover',e=>{
     const t=e.target.closest('a,button,.chips label,input:not([type=radio]),textarea');
     target=t;frame.classList.toggle('on',!!t);
-    if(t) tag.textContent=t.matches('input,textarea')?'ввод':t.matches('.svc')?'открыть →':t.matches('.case.cta')?'обсудить →':t.matches('.case')?'сайт ↗':t.matches('[data-ai]')?'выбрать ✨':t.closest('.promo')?'★ Revika':t.matches('.nav a,.logo')?'перейти':'жми →';
+    if(t) tag.textContent=t.matches('input,textarea')?'ввод':t.matches('.svc')?'открыть →':t.matches('.case.cta')?'обсудить →':t.matches('.case')?'сайт ↗':t.matches('[data-ai]')?'выбрать ✨':t.closest('.promo')?'★ Revika':t.matches('.nav a,.logo,.dd-btn')?'перейти':'жми →';
   });
   (function loop(){
     let tx,ty,tw,th;
@@ -1425,6 +1452,26 @@ document.querySelectorAll('[data-ai]').forEach(b=>b.addEventListener('click',()=
     last={x,y};if(!run){run=true;requestAnimationFrame(frame);}
   });
   hero.addEventListener('pointerleave',()=>{last=null;});
+})();
+
+// prefill the contact form when coming from a service page
+(function(){
+  let d=null;try{d=JSON.parse(sessionStorage.getItem('itsme_service')||'null');sessionStorage.removeItem('itsme_service');}catch(e){}
+  if(!d)return;
+  const chip=document.getElementById(d.chip);if(chip)chip.checked=true;
+  const msg=document.getElementById('msg');if(msg&&!msg.value)msg.value='Интересует: '+d.t+'. ';
+})();
+
+// multi-level menu: "Услуги" opens on hover (mouse) and on click/tap, closes on outside click or Esc
+(function(){
+  const dd=document.getElementById('dd-svc');if(!dd)return;
+  const btn=dd.querySelector('.dd-btn');let t;
+  const set=o=>{dd.classList.toggle('open',o);btn.setAttribute('aria-expanded',o);};
+  btn.addEventListener('click',e=>{e.stopPropagation();set(!dd.classList.contains('open'));});
+  if(matchMedia('(hover: hover)').matches){dd.addEventListener('mouseenter',()=>{clearTimeout(t);set(true);});dd.addEventListener('mouseleave',()=>{t=setTimeout(()=>set(false),180);});}
+  document.addEventListener('click',e=>{if(!dd.contains(e.target))set(false);});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&dd.classList.contains('open')){set(false);btn.focus();}});
+  dd.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
 })();
 </script>
 
