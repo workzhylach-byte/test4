@@ -36,7 +36,8 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;overflow-x:clip}
-body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+html{background:var(--bg)}
+body{background:transparent;color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--bg)}
 a{color:inherit}
 ::selection{background:var(--accent);color:var(--accent-ink)}
@@ -243,6 +244,19 @@ h3{font-family:var(--font-display);font-weight:600;font-size:21px;line-height:1.
 }
 .svc-ai{background:linear-gradient(160deg,color-mix(in srgb,var(--pink) 22%,var(--surface)),var(--surface) 70%)}
 .new{font:500 11px var(--font-mono);background:var(--pink);color:var(--ink);padding:3px 7px;border-radius:999px;vertical-align:middle;margin-left:6px}
+/* ambient background behind the whole page */
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:
+  radial-gradient(circle at 1px 1px,color-mix(in srgb,var(--fg) 9%,transparent) 1px,transparent 0) 0 0/28px 28px,
+  linear-gradient(180deg,#0c0d11,#0f1018 50%,#0c0d11)}
+.ambient i{position:absolute;border-radius:50%;filter:blur(110px);opacity:.22;animation:drift 30s ease-in-out infinite alternate}
+.ambient i:nth-child(1){width:46vw;height:46vw;background:var(--accent);left:-12vw;top:20vh}
+.ambient i:nth-child(2){width:38vw;height:38vw;background:var(--pink);right:-10vw;top:55vh;animation-duration:36s;opacity:.16}
+.ambient i:nth-child(3){width:32vw;height:32vw;background:var(--mint);left:35vw;bottom:-14vh;animation-duration:42s;opacity:.12}
+#services{background:radial-gradient(ellipse 70% 55% at 85% 0%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%),radial-gradient(ellipse 50% 45% at 5% 100%,color-mix(in srgb,var(--pink) 10%,transparent),transparent 70%)}
+.svc{background:color-mix(in srgb,var(--surface) 78%,transparent);backdrop-filter:blur(6px)}
+.svc-ai{background:linear-gradient(160deg,color-mix(in srgb,var(--pink) 22%,var(--surface)),color-mix(in srgb,var(--surface) 78%,transparent) 70%)}
+#cases{background:radial-gradient(ellipse 60% 40% at 10% 30%,color-mix(in srgb,var(--sun) 7%,transparent),transparent 70%)}
+.why-sec{background:radial-gradient(ellipse 55% 60% at 100% 50%,color-mix(in srgb,var(--lilac) 12%,transparent),transparent 70%)}
 /* revika promo */
 .promo{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;background:var(--sun);color:var(--ink);border-radius:32px;padding:clamp(28px,5vw,64px);text-decoration:none;position:relative;overflow:hidden}
 .promo > *{min-width:0;position:relative}
@@ -472,6 +486,8 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
 .cur-frame b{position:absolute;left:-2px;top:-26px;font:500 11px/1 var(--font-mono);background:var(--sun);color:var(--ink);padding:5px 8px;border-radius:6px;white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s}
 .cur-frame.on i{border-color:var(--sun)}
 .cur-frame.on b{opacity:1;transform:none}
+.cur-frame.below b{top:auto;bottom:-26px}
+.cur-frame.right b{left:auto;right:-2px}
 .has-cursor.pressing .cur-cross{transform:rotate(45deg) scale(.8)}
 .ping{position:fixed;left:0;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border:2px solid var(--sun);pointer-events:none;z-index:9998;animation:ping .5s ease-out forwards}
 @keyframes ping{to{transform:scale(6) rotate(90deg);opacity:0}}
@@ -508,6 +524,7 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
 </head>
 <body>
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
 <header class="top" lang="ru">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="itsme — на главную"><span class="lg-its">its</span><span class="lg-me">me</span><span class="lg-caret" aria-hidden="true"></span></a>
@@ -618,8 +635,8 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
 
   <div class="ticker-wrap"><div class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>Сайты</span><span>Интернет-магазины</span><span>Приложения</span><span>CRM</span><span>Чат-боты</span><span>1С и бухгалтерия</span><span>SEO</span><span>Яндекс Директ</span><span>Google Ads</span><span>Фирменный стиль</span><span>Бизнес-анализ</span><span>Дата-аналитика</span><span>ИИ-сайты</span><span>Revika</span>
-      <span>Сайты</span><span>Интернет-магазины</span><span>Приложения</span><span>CRM</span><span>Чат-боты</span><span>1С и бухгалтерия</span><span>SEO</span><span>Яндекс Директ</span><span>Google Ads</span><span>Фирменный стиль</span><span>Бизнес-анализ</span><span>Дата-аналитика</span><span>ИИ-сайты</span><span>Revika</span>
+      <span>Сайты</span><span>Интернет-магазины</span><span>Приложения</span><span>CRM</span><span>Чат-боты</span><span>1С и бухгалтерия</span><span>SEO</span><span>Яндекс Директ</span><span>Google Ads</span><span>Фирменный стиль</span><span>Бизнес-анализ</span><span>Дата-аналитика</span><span>Revika</span>
+      <span>Сайты</span><span>Интернет-магазины</span><span>Приложения</span><span>CRM</span><span>Чат-боты</span><span>1С и бухгалтерия</span><span>SEO</span><span>Яндекс Директ</span><span>Google Ads</span><span>Фирменный стиль</span><span>Бизнес-анализ</span><span>Дата-аналитика</span><span>Revika</span>
     </div>
   </div></div>
 
@@ -1028,6 +1045,7 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     const k=target?.25:.16;
     fx+=(tx-fx)*k;fy+=(ty-fy)*k;fw+=(tw-fw)*k;fh+=(th-fh)*k;
     frame.style.transform=`translate(${fx}px,${fy}px)`;frame.style.width=fw+'px';frame.style.height=fh+'px';
+    frame.classList.toggle('below',fy<40);frame.classList.toggle('right',fx+120>innerWidth);
     requestAnimationFrame(loop);
   })();
   addEventListener('pointerdown',e=>{
