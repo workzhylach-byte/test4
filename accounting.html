@@ -171,6 +171,25 @@ h2{font:600 clamp(26px,3.6vw,42px)/1.1 var(--font-display);letter-spacing:-.03em
 .faq details:hover,.faq details[open]{border-color:color-mix(in srgb,var(--c) 50%,var(--line))}
 .faq details[open] summary i{transform:rotate(45deg)}
 .faq p{margin:0;padding:0 20px 18px;color:var(--muted)}
+/* FAQ: card unfolds smoothly, a light beam sweeps across, the + spins with a ripple, the answer is "typed in" word by word */
+.faq details{position:relative;overflow:hidden;isolation:isolate}
+.faq details::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:0 3px 3px 0;background:var(--c);transform:scaleY(0);transform-origin:top;transition:transform .5s cubic-bezier(.2,.8,.2,1);z-index:1}
+.faq details[open]::before{transform:scaleY(1)}
+.faq details::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,color-mix(in srgb,var(--c) 24%,transparent) 50%,transparent 65%);transform:translateX(-110%)}
+.faq details.beam::after{animation:faqBeam .9s cubic-bezier(.3,.6,.2,1)}
+@keyframes faqBeam{to{transform:translateX(110%)}}
+.faq summary i{position:relative;transition:transform .55s cubic-bezier(.3,1.6,.5,1),background .3s,color .3s}
+.faq details[open] summary i{transform:rotate(225deg)}
+.faq summary i::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:2px solid var(--c);opacity:0;pointer-events:none}
+.faq details.beam summary i::after{animation:faqRing .7s ease-out}
+@keyframes faqRing{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(2.2)}}
+.faq summary{transition:color .3s}
+.faq details[open] summary{color:#fff}
+.faq .w{display:inline-block}
+.faq details.revealing .w{animation:faqWord .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 22ms + 120ms)}
+@keyframes faqWord{from{opacity:0;filter:blur(6px);transform:translateY(10px) rotate(2deg)}}
+.faq details.closing .w{transition:opacity .2s,filter .2s;opacity:0;filter:blur(4px)}
+
 .final{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding:clamp(26px,4vw,44px);border-radius:28px;background:var(--c);color:var(--ink)}
 .final p{margin:8px 0 0;max-width:50ch;opacity:.8}
 .others{display:flex;flex-wrap:wrap;gap:10px}
@@ -659,6 +678,45 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 // scroll progress
 (function(){const bar=document.getElementById('progress');if(!bar)return;const u=()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform=`scaleX(${h>0?scrollY/h:0})`;};addEventListener('scroll',u,{passive:true});u();})();
 
+</script>
+<script>
+// FAQ open/close animation: height via Web Animations (details can't transition height on its own), words revealed one by one
+(function(){
+  const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.faq details').forEach(d=>{
+    const sum=d.querySelector('summary');
+    // wrap each word of the answer in a span with its index
+    let n=0;[...d.children].filter(el=>el!==sum).forEach(el=>{
+      const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+      nodes.forEach(t=>{const f=document.createDocumentFragment();t.textContent.split(/(\s+)/).forEach(part=>{
+        if(!part)return;if(/^\s+$/.test(part)){f.append(part);return;}
+        const s=document.createElement('span');s.className='w';s.style.setProperty('--i',Math.min(n++,40));s.textContent=part;f.append(s);});
+        t.replaceWith(f);});
+    });
+    if(rm)return;
+    let anim=null;
+    sum.addEventListener('click',e=>{
+      e.preventDefault();
+      if(anim){anim.cancel();anim=null;}
+      const start=d.offsetHeight+'px';
+      if(!d.open){
+        d.open=true;d.classList.remove('closing');
+        const end=d.offsetHeight+'px';
+        d.classList.remove('beam','revealing');void d.offsetWidth;d.classList.add('beam','revealing');
+        anim=d.animate({height:[start,end]},{duration:520,easing:'cubic-bezier(.2,.8,.2,1)'});
+        const words=d.querySelectorAll('.w').length;
+        setTimeout(()=>d.classList.remove('revealing'),700+Math.min(words,40)*22);
+        setTimeout(()=>d.classList.remove('beam'),950);
+      }else{
+        d.classList.add('closing');d.classList.remove('revealing');
+        const end=sum.offsetHeight+(d.offsetHeight-d.clientHeight)+'px';
+        anim=d.animate({height:[start,end]},{duration:380,easing:'cubic-bezier(.5,0,.3,1)'});
+        anim.onfinish=()=>{d.open=false;d.classList.remove('closing');anim=null;};
+      }
+      if(anim&&d.open&&!d.classList.contains('closing'))anim.onfinish=()=>{anim=null;};
+    });
+  });
+})();
 </script>
 </body>
 </html>

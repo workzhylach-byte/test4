@@ -155,6 +155,8 @@ h2{font:600 clamp(26px,3.6vw,42px)/1.1 var(--font-display);letter-spacing:-.03em
 .mini-cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .mini-case{position:relative;display:grid;gap:4px;padding:20px 48px 20px 20px;border-radius:18px;text-decoration:none;background:color-mix(in srgb,var(--surface) 70%,transparent);border:1px solid var(--line);transition:border-color .3s,transform .3s;min-width:0}
 .mini-case:hover{border-color:var(--c);transform:translateY(-4px)}
+.mini-case .mc-flag{justify-self:start;font:500 11px var(--font-mono);font-style:normal;color:var(--fg);background:rgba(255,255,255,.07);border:1px solid var(--line);padding:4px 8px;border-radius:999px;margin-bottom:4px}
+.fe{font-family:"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif;font-style:normal;letter-spacing:0}
 .mini-case b{font-size:17px;overflow-wrap:anywhere}
 .mini-case span{color:var(--muted);font-size:14px}
 .mini-case small{font:500 12px var(--font-mono);color:var(--c)}
@@ -172,6 +174,25 @@ h2{font:600 clamp(26px,3.6vw,42px)/1.1 var(--font-display);letter-spacing:-.03em
 .faq details:hover,.faq details[open]{border-color:color-mix(in srgb,var(--c) 50%,var(--line))}
 .faq details[open] summary i{transform:rotate(45deg)}
 .faq p{margin:0;padding:0 20px 18px;color:var(--muted)}
+/* FAQ: card unfolds smoothly, a light beam sweeps across, the + spins with a ripple, the answer is "typed in" word by word */
+.faq details{position:relative;overflow:hidden;isolation:isolate}
+.faq details::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:0 3px 3px 0;background:var(--c);transform:scaleY(0);transform-origin:top;transition:transform .5s cubic-bezier(.2,.8,.2,1);z-index:1}
+.faq details[open]::before{transform:scaleY(1)}
+.faq details::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,color-mix(in srgb,var(--c) 24%,transparent) 50%,transparent 65%);transform:translateX(-110%)}
+.faq details.beam::after{animation:faqBeam .9s cubic-bezier(.3,.6,.2,1)}
+@keyframes faqBeam{to{transform:translateX(110%)}}
+.faq summary i{position:relative;transition:transform .55s cubic-bezier(.3,1.6,.5,1),background .3s,color .3s}
+.faq details[open] summary i{transform:rotate(225deg)}
+.faq summary i::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:2px solid var(--c);opacity:0;pointer-events:none}
+.faq details.beam summary i::after{animation:faqRing .7s ease-out}
+@keyframes faqRing{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(2.2)}}
+.faq summary{transition:color .3s}
+.faq details[open] summary{color:#fff}
+.faq .w{display:inline-block}
+.faq details.revealing .w{animation:faqWord .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 22ms + 120ms)}
+@keyframes faqWord{from{opacity:0;filter:blur(6px);transform:translateY(10px) rotate(2deg)}}
+.faq details.closing .w{transition:opacity .2s,filter .2s;opacity:0;filter:blur(4px)}
+
 .final{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding:clamp(26px,4vw,44px);border-radius:28px;background:var(--c);color:var(--ink)}
 .final p{margin:8px 0 0;max-width:50ch;opacity:.8}
 .others{display:flex;flex-wrap:wrap;gap:10px}
@@ -227,6 +248,8 @@ footer a:hover{color:var(--fg)}
 .phone > i{height:7px;border-radius:4px;background:#3a3f56}
 .phone > i:nth-of-type(2){width:70%}
 .phone .ph-btn{height:18px;width:60%;border-radius:9px;background:var(--c)}
+.lay-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:inherit;display:block}.lay-img.wire{inset:10px;width:calc(100% - 20px);height:calc(100% - 20px);opacity:.85}.lay-img.des{opacity:.5}.l2 .sw,.l2 .type{z-index:1}.ph-screen{position:absolute;inset:22px 8px 8px;border-radius:14px;overflow:hidden;background:#fff}.ph-screen img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+.cms-art{position:relative;margin:0;width:100%;max-width:640px;align-self:center}.cms-art img{display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 40px 80px -30px var(--c),0 0 0 1px rgba(255,255,255,.08);animation:float 7s ease-in-out infinite}.cms-art .chip-s.c1{left:-14px;top:-16px}.cms-art .chip-s.c2{left:auto;right:-10px;bottom:-14px}@media (max-width:1150px){.art-wrap:has(.cms-art){height:auto}}@media (max-width:560px){.cms-art .chip-s{font-size:11px;padding:6px 10px}.cms-art .chip-s.c1{left:6px;top:-14px}.cms-art .chip-s.c2{right:6px}}
 @keyframes float{50%{transform:translateY(-14px)}}
 .chip-s{position:absolute;font:500 12px var(--font-mono);padding:8px 12px;border-radius:999px;background:rgba(20,22,32,.8);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#eef0f6;white-space:nowrap;animation:float 7s ease-in-out infinite}
 .chip-s.c1{left:0;top:18px}
@@ -508,6 +531,7 @@ footer a:hover{color:var(--fg)}
 
 .iso{width:100%}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap&text=%F0%9F%87%A6%F0%9F%87%A7%F0%9F%87%A8%F0%9F%87%A9%F0%9F%87%AA%F0%9F%87%AB%F0%9F%87%AC%F0%9F%87%AE%F0%9F%87%B0%F0%9F%87%B1%F0%9F%87%B2%F0%9F%87%B3%F0%9F%87%B5%F0%9F%87%B7%F0%9F%87%B8%F0%9F%87%B9%F0%9F%87%BA%F0%9F%87%BB%F0%9F%87%BE%F0%9F%87%BF">
 </head>
 <body>
 <div class="progress" id="progress" aria-hidden="true"></div>
@@ -530,22 +554,13 @@ footer a:hover{color:var(--fg)}
       <p class="lead">Лендинги, корпоративные сайты и визитки. Делаем всё сами: от структуры и текстов до запуска на вашем домене.</p>
       <div class="cta"><a class="btn" href="./#contact" data-pre="Сайты под ключ">Обсудить проект →</a><a class="btn ghost" href="#incl">Что входит</a></div>
     </div>
-    <div class="art-wrap rise d2"><div class="iso" aria-label="Слои сайта: прототип, дизайн, готовый сайт" role="img">
-  <div class="iso-stage">
-    <div class="layer l1"><span class="tag">01 · прототип</span><div class="wf"><i></i><i></i><i></i><i class="box"></i><i class="btnw"></i></div></div>
-    <div class="layer l2"><span class="tag">02 · дизайн</span><div class="sw"><i></i><i></i><i></i><i></i><i></i></div><div class="type">Aa</div><div class="grid8"></div></div>
-    <div class="layer l3"><span class="tag">03 · сайт</span><div class="site"><div class="nav-s"><b></b><i></i><i></i><i class="cta-s"></i></div><div class="hero-s"><div><i class="h1"></i><i class="h2"></i><i class="p"></i><i class="b"></i></div><div class="orb-s"></div></div></div></div>
-  </div>
-  <div class="phone"><div class="notch"></div><div class="ph-hero"></div><i></i><i></i><i class="ph-btn"></i></div>
-  <span class="chip-s c1">Tilda · WordPress · MODX</span>
-  <span class="chip-s c2">✓ адаптив</span>
-</div></div>
+    <div class="art-wrap rise d2"><figure class="cms-art"><img src="img/hero-web-cms.webp" alt="Админ-панели WordPress, Joomla, OpenCart и 1С-Битрикс" width="1671" height="941" decoding="async" fetchpriority="high"><span class="chip-s c1">WordPress · Joomla · OpenCart · Bitrix</span><span class="chip-s c2">✓ адаптив</span></figure></div>
   </div></section>
   <div class="ticker-wrap"><div class="ticker" aria-hidden="true" style="background:#5b7cff"><div class="ticker-track"><span>Структура и тексты</span><span>Уникальный дизайн</span><span>Адаптив</span><span>Формы заявок</span><span>Базовое SEO</span><span>Запуск и обучение</span><span>Tilda</span><span>WordPress</span><span>1С-Bitrix</span><span>OpenCart</span><span>Joomla</span><span>MODX</span><span>Django</span><span>Laravel</span><span>Структура и тексты</span><span>Уникальный дизайн</span><span>Адаптив</span><span>Формы заявок</span><span>Базовое SEO</span><span>Запуск и обучение</span><span>Tilda</span><span>WordPress</span><span>1С-Bitrix</span><span>OpenCart</span><span>Joomla</span><span>MODX</span><span>Django</span><span>Laravel</span></div></div></div>
   <section class="blk" id="incl"><div class="wrap"><div class="head reveal"><span class="lbl">Что входит</span><h2>Делаем <em>под ключ</em></h2></div><ul class="incl"><li class="reveal"><span class="n">01</span><div><h3>Структура и тексты</h3><p>Продумываем, что и в каком порядке увидит клиент, и пишем понятные тексты.</p></div></li><li class="reveal"><span class="n">02</span><div><h3>Уникальный дизайн</h3><p>Рисуем дизайн под ваш бизнес, без шаблонов.</p></div></li><li class="reveal"><span class="n">03</span><div><h3>Адаптив</h3><p>Сайт удобен на телефоне, планшете и компьютере.</p></div></li><li class="reveal"><span class="n">04</span><div><h3>Формы заявок</h3><p>Заявки приходят в Telegram, на почту или в CRM.</p></div></li><li class="reveal"><span class="n">05</span><div><h3>Базовое SEO</h3><p>Мета-теги, карта сайта и скорость загрузки.</p></div></li><li class="reveal"><span class="n">06</span><div><h3>Запуск и обучение</h3><p>Публикуем на домене и показываем, как менять контент.</p></div></li></ul></div></section>
   
   <section class="blk"><div class="wrap two"><div><span class="lbl">Кому подходит</span><div class="pills"><span>Услуги и сервисы</span><span>Корпоративные сайты</span><span>Продуктовые лендинги</span><span>Портфолио и визитки</span></div></div><div><span class="lbl">Технологии</span><div class="pills mono"><span>Tilda</span><span>WordPress</span><span>1С-Bitrix</span><span>OpenCart</span><span>Joomla</span><span>MODX</span><span>Django</span><span>Laravel</span></div></div></div></section>
-  <section class="blk"><div class="wrap"><div class="head reveal"><span class="lbl">Кейсы</span><h2>Уже <em>сделали</em></h2></div><div class="mini-cases"><a class="mini-case" href="https://domani.by" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/domani-by-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/domani-by-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><b>domani.by</b><span>Дизайн · вёрстка</span><small>Tilda</small><i aria-hidden="true">↗</i></a><a class="mini-case" href="https://nautikone.com" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/nautikone-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/nautikone-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><b>nautikone.com</b><span>Дизайн · вёрстка</span><small>WordPress</small><i aria-hidden="true">↗</i></a><a class="mini-case" href="https://coppingjoyce.co.uk" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/coppingjoyce-co-uk-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/coppingjoyce-co-uk-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><b>coppingjoyce.co.uk</b><span>Дизайн · вёрстка</span><small>WordPress</small><i aria-hidden="true">↗</i></a><a class="mini-case" href="https://swanlake-capital.com" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/swanlake-capital-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/swanlake-capital-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><b>swanlake-capital.com</b><span>Дизайн · вёрстка</span><small>WordPress</small><i aria-hidden="true">↗</i></a></div></div></section>
+  <section class="blk"><div class="wrap"><div class="head reveal"><span class="lbl">Кейсы</span><h2>Уже <em>сделали</em></h2></div><div class="mini-cases"><a class="mini-case" href="https://domani.by" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/domani-by-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/domani-by-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><em class="mc-flag"><span class="fe">🇧🇾</span> Беларусь</em><b>domani.by</b><span>Мебель на заказ премиум-класса для дизайнеров и частных клиентов</span><small>Дизайн · вёрстка · Tilda</small><i aria-hidden="true">↗</i></a><a class="mini-case" href="https://nautikone.com" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/nautikone-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/nautikone-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><em class="mc-flag"><span class="fe">🇦🇷</span> Аргентина</em><b>nautikone.com</b><span>Морской консалтинг: документы и соответствие нормам для судов</span><small>Дизайн · вёрстка · WordPress</small><i aria-hidden="true">↗</i></a><a class="mini-case" href="https://coppingjoyce.co.uk" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/coppingjoyce-co-uk-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/coppingjoyce-co-uk-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><em class="mc-flag"><span class="fe">🇬🇧</span> Великобритания</em><b>coppingjoyce.co.uk</b><span>Лондонская компания по коммерческой недвижимости с 1898 года</span><small>Дизайн · вёрстка · WordPress</small><i aria-hidden="true">↗</i></a><a class="mini-case" href="https://swanlake-capital.com" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/swanlake-capital-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/swanlake-capital-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><em class="mc-flag"><span class="fe">🇧🇾</span> Беларусь</em><b>swanlake-capital.com</b><span>Инвестиционный консалтинг: сделки, привлечение инвестиций</span><small>Дизайн · вёрстка · WordPress</small><i aria-hidden="true">↗</i></a></div></div></section>
   <section class="blk"><div class="wrap"><div class="head reveal"><span class="lbl">Вопросы</span><h2>Частые <em>вопросы</em></h2></div><div class="faq"><details><summary>Сколько стоит сайт?<i aria-hidden="true">+</i></summary><p>Зависит от количества страниц и функций. После короткого созвона назовём точную цену и сроки.</p></details><details><summary>Можно ли потом менять сайт самим?<i aria-hidden="true">+</i></summary><p>Да. Подбираем удобную систему управления и показываем, как ей пользоваться.</p></details><details><summary>Нужны ли готовые тексты и фото?<i aria-hidden="true">+</i></summary><p>Не обязательно. Можем написать тексты и подобрать или сгенерировать изображения.</p></details><details><summary>Нужно быстрее и дешевле?<i aria-hidden="true">+</i></summary><p>Посмотрите ИИ-сайт за $150: подходит для старта и проверки идеи.</p></details></div></div></section>
   <section class="blk"><div class="wrap"><div class="final reveal"><span class="ring r1" aria-hidden="true"></span><span class="ring r2" aria-hidden="true"></span><div><h2>Обсудим ваш проект?</h2><p>Расскажите о задаче, и мы ответим в течение рабочего дня с идеями и оценкой.</p></div><a class="btn dark" href="./#contact" data-pre="Сайты под ключ">Оставить заявку →</a></div></div></section>
   <section class="blk"><div class="wrap"><div class="head reveal"><span class="lbl">Другие услуги</span></div><div class="others"><a href="shop.html" style="--c:#38bdf8"><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 9h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/><circle cx="9" cy="20" r="1"/><circle cx="16" cy="20" r="1"/></svg>Интернет-магазины</a><a href="crm.html" style="--c:#ffc24b"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg>CRM-системы</a><a href="accounting.html" style="--c:#3fe0b0"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M8 18h8"/></svg>Подключение бухгалтерии</a><a href="bots.html" style="--c:#b79bff"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 7V4M9 12h.01M15 12h.01M9.5 15.5h5"/></svg>Чат-боты</a><a href="seo.html" style="--c:#5b7cff"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5M8.5 12.5l2-2 1.5 1.5 2.5-3"/></svg>SEO и продвижение</a><a href="design.html" style="--c:#a78bfa"><svg viewBox="0 0 24 24"><path d="M12 3l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z"/><path d="M5 20h14"/></svg>UI/UX дизайн</a><a href="ai.html" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>ИИ-сайты</a><a href="reviews.html" style="--c:#ffc24b"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>Revika</a></div></div></section>
@@ -657,6 +672,45 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 // scroll progress
 (function(){const bar=document.getElementById('progress');if(!bar)return;const u=()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform=`scaleX(${h>0?scrollY/h:0})`;};addEventListener('scroll',u,{passive:true});u();})();
 
+</script>
+<script>
+// FAQ open/close animation: height via Web Animations (details can't transition height on its own), words revealed one by one
+(function(){
+  const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.faq details').forEach(d=>{
+    const sum=d.querySelector('summary');
+    // wrap each word of the answer in a span with its index
+    let n=0;[...d.children].filter(el=>el!==sum).forEach(el=>{
+      const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+      nodes.forEach(t=>{const f=document.createDocumentFragment();t.textContent.split(/(\s+)/).forEach(part=>{
+        if(!part)return;if(/^\s+$/.test(part)){f.append(part);return;}
+        const s=document.createElement('span');s.className='w';s.style.setProperty('--i',Math.min(n++,40));s.textContent=part;f.append(s);});
+        t.replaceWith(f);});
+    });
+    if(rm)return;
+    let anim=null;
+    sum.addEventListener('click',e=>{
+      e.preventDefault();
+      if(anim){anim.cancel();anim=null;}
+      const start=d.offsetHeight+'px';
+      if(!d.open){
+        d.open=true;d.classList.remove('closing');
+        const end=d.offsetHeight+'px';
+        d.classList.remove('beam','revealing');void d.offsetWidth;d.classList.add('beam','revealing');
+        anim=d.animate({height:[start,end]},{duration:520,easing:'cubic-bezier(.2,.8,.2,1)'});
+        const words=d.querySelectorAll('.w').length;
+        setTimeout(()=>d.classList.remove('revealing'),700+Math.min(words,40)*22);
+        setTimeout(()=>d.classList.remove('beam'),950);
+      }else{
+        d.classList.add('closing');d.classList.remove('revealing');
+        const end=sum.offsetHeight+(d.offsetHeight-d.clientHeight)+'px';
+        anim=d.animate({height:[start,end]},{duration:380,easing:'cubic-bezier(.5,0,.3,1)'});
+        anim.onfinish=()=>{d.open=false;d.classList.remove('closing');anim=null;};
+      }
+      if(anim&&d.open&&!d.classList.contains('closing'))anim.onfinish=()=>{anim=null;};
+    });
+  });
+})();
 </script>
 </body>
 </html>

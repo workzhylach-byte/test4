@@ -188,6 +188,8 @@ h3{font-family:var(--font-display);font-weight:600;font-size:21px;line-height:1.
 .case{display:flex;flex-direction:column;gap:8px;text-decoration:none;border:1px solid var(--line);border-radius:16px;padding:14px 14px 16px;background:var(--surface);min-width:0;transition:transform .3s,border-color .3s,background .3s}
 .case:hover{transform:translateY(-5px);border-color:var(--fg)}
 .case-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.case .cflag{align-self:flex-start;font:500 11px var(--font-mono);color:var(--fg);background:rgba(255,255,255,.07);border:1px solid var(--line);padding:4px 8px;border-radius:999px}
+.case .desc{margin:0;font-size:13px;line-height:1.45;color:#c9cdd8}
 .case .dom{font:600 15px var(--font-body);overflow-wrap:anywhere}
 .case .arrow{flex:none;width:28px;height:28px;font-size:13px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);transition:transform .3s,background .3s}
 .case:hover .arrow{transform:rotate(45deg);background:var(--fg);color:var(--ink)}
@@ -838,7 +840,7 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
         <div class="sec-label">Кейсы</div>
         <div>
           <h2>Проекты, которые <em>уже работают</em></h2>
-          <div class="case-stats"><div><b>7</b><span>стран: Беларусь, Россия, США, Франция, Польша, Сербия, Великобритания</span></div></div>
+          <div class="case-stats"><div><b>8</b><span>стран: Беларусь, Россия, США, Франция, Польша, Сербия, Великобритания, Аргентина</span></div></div>
         </div>
       </div>
       <div class="dir-tabs" role="tablist" aria-label="Направления">
@@ -884,42 +886,58 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
       <div class="cases-cms">
         <a class="case reveal" data-kind="cms" href="https://domani.by" target="_blank" rel="noopener">
           <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/domani-by-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/domani-by-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
+          <span class="cflag"><span class="fe">🇧🇾</span> Беларусь</span>
           <div class="case-top"><span class="dom">domani.by</span><span class="arrow" aria-hidden="true">↗</span></div>
+          <p class="desc">Мебель на заказ премиум-класса для дизайнеров и частных клиентов</p>
           <div class="case-foot"><span>Дизайн · вёрстка</span><b>Tilda</b></div>
         </a>
         <a class="case reveal" data-kind="cms" href="https://daoonline.ru" target="_blank" rel="noopener">
           <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/daoonline-ru-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/daoonline-ru-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
+          <span class="cflag"><span class="fe">🇷🇺</span> Россия</span>
           <div class="case-top"><span class="dom">daoonline.ru</span><span class="arrow" aria-hidden="true">↗</span></div>
+          <p class="desc">Dao dé Rooms: аренда апартаментов и лофтов с онлайн-бронированием</p>
           <div class="case-foot"><span>Дизайн · вёрстка</span><b>1С-Bitrix</b></div>
         </a>
         <a class="case reveal" data-kind="cms" href="https://nautikone.com" target="_blank" rel="noopener">
           <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/nautikone-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/nautikone-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
+          <span class="cflag"><span class="fe">🇦🇷</span> Аргентина</span>
           <div class="case-top"><span class="dom">nautikone.com</span><span class="arrow" aria-hidden="true">↗</span></div>
+          <p class="desc">Морской консалтинг: документы и соответствие нормам для судов</p>
           <div class="case-foot"><span>Дизайн · вёрстка</span><b>WordPress</b></div>
         </a>
         <a class="case reveal" data-kind="cms" href="https://coppingjoyce.co.uk" target="_blank" rel="noopener">
           <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/coppingjoyce-co-uk-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/coppingjoyce-co-uk-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
+          <span class="cflag"><span class="fe">🇬🇧</span> Великобритания</span>
           <div class="case-top"><span class="dom">coppingjoyce.co.uk</span><span class="arrow" aria-hidden="true">↗</span></div>
+          <p class="desc">Лондонская компания по коммерческой недвижимости с 1898 года</p>
           <div class="case-foot"><span>Дизайн · вёрстка</span><b>WordPress</b></div>
         </a>
         <a class="case reveal" data-kind="cms" href="https://swanlake-capital.com" target="_blank" rel="noopener">
           <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/swanlake-capital-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/swanlake-capital-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
+          <span class="cflag"><span class="fe">🇧🇾</span> Беларусь</span>
           <div class="case-top"><span class="dom">swanlake-capital.com</span><span class="arrow" aria-hidden="true">↗</span></div>
+          <p class="desc">Инвестиционный консалтинг: сделки, привлечение инвестиций</p>
           <div class="case-foot"><span>Дизайн · вёрстка</span><b>WordPress</b></div>
         </a>
         <a class="case reveal" data-kind="cms" data-seo href="https://grooming-online.ru" target="_blank" rel="noopener">
           <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/grooming-online-ru-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/grooming-online-ru-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
+          <span class="cflag"><span class="fe">🇷🇺</span> Россия</span>
           <div class="case-top"><span class="dom">grooming-online.ru</span><span class="arrow" aria-hidden="true">↗</span></div>
+          <p class="desc">Онлайн-академия груминга: курсы, личный кабинет и магазин</p>
           <div class="case-foot"><span>Дизайн · вёрстка · SEO</span><b>WordPress · WooCommerce · Tutor LMS</b></div>
         </a>
         <a class="case reveal" data-kind="cms" data-seo href="https://ladan.by" target="_blank" rel="noopener">
           <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/ladan-by-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/ladan-by-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
+          <span class="cflag"><span class="fe">🇧🇾</span> Беларусь</span>
           <div class="case-top"><span class="dom">ladan.by</span><span class="arrow" aria-hidden="true">↗</span></div>
+          <p class="desc">Ритуальные услуги и памятники: каталог, цены и заказ онлайн</p>
           <div class="case-foot"><span>Дизайн · вёрстка · SEO</span><b>WordPress · WooCommerce</b></div>
         </a>
         <a class="case reveal" data-kind="cms" data-seo data-seo-only href="https://nordwave.ru" target="_blank" rel="noopener" hidden>
           <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/nordwave-ru-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/nordwave-ru-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
+          <span class="cflag"><span class="fe">🇷🇺</span> Россия</span>
           <div class="case-top"><span class="dom">nordwave.ru</span><span class="arrow" aria-hidden="true">↗</span></div>
+          <p class="desc">Поставщик рыбы и морепродуктов для ресторанов Санкт-Петербурга</p>
           <div class="case-foot"><span>SEO-продвижение</span><b>WordPress</b></div>
         </a>
         <a class="case cta reveal" data-kind="cms" href="#contact" data-quick>

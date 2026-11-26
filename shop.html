@@ -155,6 +155,8 @@ h2{font:600 clamp(26px,3.6vw,42px)/1.1 var(--font-display);letter-spacing:-.03em
 .mini-cases{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .mini-case{position:relative;display:grid;gap:4px;padding:20px 48px 20px 20px;border-radius:18px;text-decoration:none;background:color-mix(in srgb,var(--surface) 70%,transparent);border:1px solid var(--line);transition:border-color .3s,transform .3s;min-width:0}
 .mini-case:hover{border-color:var(--c);transform:translateY(-4px)}
+.mini-case .mc-flag{justify-self:start;font:500 11px var(--font-mono);font-style:normal;color:var(--fg);background:rgba(255,255,255,.07);border:1px solid var(--line);padding:4px 8px;border-radius:999px;margin-bottom:4px}
+.fe{font-family:"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",sans-serif;font-style:normal;letter-spacing:0}
 .mini-case b{font-size:17px;overflow-wrap:anywhere}
 .mini-case span{color:var(--muted);font-size:14px}
 .mini-case small{font:500 12px var(--font-mono);color:var(--c)}
@@ -172,6 +174,25 @@ h2{font:600 clamp(26px,3.6vw,42px)/1.1 var(--font-display);letter-spacing:-.03em
 .faq details:hover,.faq details[open]{border-color:color-mix(in srgb,var(--c) 50%,var(--line))}
 .faq details[open] summary i{transform:rotate(45deg)}
 .faq p{margin:0;padding:0 20px 18px;color:var(--muted)}
+/* FAQ: card unfolds smoothly, a light beam sweeps across, the + spins with a ripple, the answer is "typed in" word by word */
+.faq details{position:relative;overflow:hidden;isolation:isolate}
+.faq details::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:0 3px 3px 0;background:var(--c);transform:scaleY(0);transform-origin:top;transition:transform .5s cubic-bezier(.2,.8,.2,1);z-index:1}
+.faq details[open]::before{transform:scaleY(1)}
+.faq details::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(105deg,transparent 35%,color-mix(in srgb,var(--c) 24%,transparent) 50%,transparent 65%);transform:translateX(-110%)}
+.faq details.beam::after{animation:faqBeam .9s cubic-bezier(.3,.6,.2,1)}
+@keyframes faqBeam{to{transform:translateX(110%)}}
+.faq summary i{position:relative;transition:transform .55s cubic-bezier(.3,1.6,.5,1),background .3s,color .3s}
+.faq details[open] summary i{transform:rotate(225deg)}
+.faq summary i::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:2px solid var(--c);opacity:0;pointer-events:none}
+.faq details.beam summary i::after{animation:faqRing .7s ease-out}
+@keyframes faqRing{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(2.2)}}
+.faq summary{transition:color .3s}
+.faq details[open] summary{color:#fff}
+.faq .w{display:inline-block}
+.faq details.revealing .w{animation:faqWord .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 22ms + 120ms)}
+@keyframes faqWord{from{opacity:0;filter:blur(6px);transform:translateY(10px) rotate(2deg)}}
+.faq details.closing .w{transition:opacity .2s,filter .2s;opacity:0;filter:blur(4px)}
+
 .final{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;padding:clamp(26px,4vw,44px);border-radius:28px;background:var(--c);color:var(--ink)}
 .final p{margin:8px 0 0;max-width:50ch;opacity:.8}
 .others{display:flex;flex-wrap:wrap;gap:10px}
@@ -508,6 +529,7 @@ footer a:hover{color:var(--fg)}
 
 .iso{width:100%}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap&text=%F0%9F%87%A6%F0%9F%87%A7%F0%9F%87%A8%F0%9F%87%A9%F0%9F%87%AA%F0%9F%87%AB%F0%9F%87%AC%F0%9F%87%AE%F0%9F%87%B0%F0%9F%87%B1%F0%9F%87%B2%F0%9F%87%B3%F0%9F%87%B5%F0%9F%87%B7%F0%9F%87%B8%F0%9F%87%B9%F0%9F%87%BA%F0%9F%87%BB%F0%9F%87%BE%F0%9F%87%BF">
 </head>
 <body>
 <div class="progress" id="progress" aria-hidden="true"></div>
@@ -555,7 +577,7 @@ footer a:hover{color:var(--fg)}
   <section class="blk" id="incl"><div class="wrap"><div class="head reveal"><span class="lbl">Что входит</span><h2>Делаем <em>под ключ</em></h2></div><ul class="incl"><li class="reveal"><span class="n">01</span><div><h3>Каталог и фильтры</h3><p>Удобный поиск и фильтры по товарам.</p></div></li><li class="reveal"><span class="n">02</span><div><h3>Корзина и заказ</h3><p>Короткое оформление без лишних шагов.</p></div></li><li class="reveal"><span class="n">03</span><div><h3>Онлайн-оплата</h3><p>Подключаем удобные способы оплаты.</p></div></li><li class="reveal"><span class="n">04</span><div><h3>Доставка</h3><p>Самовывоз, курьер, службы доставки.</p></div></li><li class="reveal"><span class="n">05</span><div><h3>Склад и 1С</h3><p>Остатки и цены обновляются автоматически.</p></div></li><li class="reveal"><span class="n">06</span><div><h3>Личный кабинет</h3><p>История заказов и повторные покупки.</p></div></li></ul></div></section>
   
   <section class="blk"><div class="wrap two"><div><span class="lbl">Кому подходит</span><div class="pills"><span>Розница</span><span>Опт</span><span>Каталоги товаров</span><span>Онлайн-школы и курсы</span></div></div><div><span class="lbl">Технологии</span><div class="pills mono"><span>WooCommerce</span><span>Django</span><span>Laravel</span><span>1С-Bitrix</span><span>Tutor LMS</span></div></div></div></section>
-  <section class="blk"><div class="wrap"><div class="head reveal"><span class="lbl">Кейсы</span><h2>Уже <em>сделали</em></h2></div><div class="mini-cases"><a class="mini-case" href="https://secondtime.com" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/secondtime-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/secondtime-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><b>secondtime.com</b><span>Интернет-магазин и скуп премиальных часов</span><small>Python Django · США</small><i aria-hidden="true">↗</i></a><a class="mini-case" href="https://grooming-online.ru" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/grooming-online-ru-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/grooming-online-ru-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><b>grooming-online.ru</b><span>Дизайн · вёрстка · SEO</span><small>WordPress · WooCommerce · Tutor LMS</small><i aria-hidden="true">↗</i></a><a class="mini-case" href="https://ladan.by" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/ladan-by-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/ladan-by-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><b>ladan.by</b><span>Дизайн · вёрстка · SEO</span><small>WordPress · WooCommerce</small><i aria-hidden="true">↗</i></a></div></div></section>
+  <section class="blk"><div class="wrap"><div class="head reveal"><span class="lbl">Кейсы</span><h2>Уже <em>сделали</em></h2></div><div class="mini-cases"><a class="mini-case" href="https://secondtime.com" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/secondtime-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/secondtime-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><em class="mc-flag"><span class="fe">🇺🇸</span> США</em><b>secondtime.com</b><span>Интернет-магазин и скуп премиальных часов</span><small>Дизайн · разработка · Python Django</small><i aria-hidden="true">↗</i></a><a class="mini-case" href="https://grooming-online.ru" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/grooming-online-ru-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/grooming-online-ru-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><em class="mc-flag"><span class="fe">🇷🇺</span> Россия</em><b>grooming-online.ru</b><span>Онлайн-академия груминга: курсы, личный кабинет и магазин</span><small>Дизайн · вёрстка · SEO · WordPress · WooCommerce</small><i aria-hidden="true">↗</i></a><a class="mini-case" href="https://ladan.by" target="_blank" rel="noopener"><span class="mc-shot" aria-hidden="true"><img class="shot-d" src="img/cases/ladan-by-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/ladan-by-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></span><em class="mc-flag"><span class="fe">🇧🇾</span> Беларусь</em><b>ladan.by</b><span>Ритуальные услуги и памятники: каталог, цены и заказ онлайн</span><small>Дизайн · вёрстка · SEO · WordPress · WooCommerce</small><i aria-hidden="true">↗</i></a></div></div></section>
   <section class="blk"><div class="wrap"><div class="head reveal"><span class="lbl">Вопросы</span><h2>Частые <em>вопросы</em></h2></div><div class="faq"><details><summary>Можно ли перенести товары со старого сайта?<i aria-hidden="true">+</i></summary><p>Да, переносим каталог, описания и фото.</p></details><details><summary>Будет ли связь с 1С?<i aria-hidden="true">+</i></summary><p>Да, настраиваем обмен товарами, ценами, остатками и заказами.</p></details><details><summary>Какие способы оплаты можно подключить?<i aria-hidden="true">+</i></summary><p>Подбираем под вашу страну и банк, обсудим на созвоне.</p></details><details><summary>Есть вариант дешевле?<i aria-hidden="true">+</i></summary><p>ИИ-магазин за $300 подойдёт для небольшого каталога.</p></details></div></div></section>
   <section class="blk"><div class="wrap"><div class="final reveal"><span class="ring r1" aria-hidden="true"></span><span class="ring r2" aria-hidden="true"></span><div><h2>Обсудим ваш проект?</h2><p>Расскажите о задаче, и мы ответим в течение рабочего дня с идеями и оценкой.</p></div><a class="btn dark" href="./#contact" data-pre="Интернет-магазины">Оставить заявку →</a></div></div></section>
   <section class="blk"><div class="wrap"><div class="head reveal"><span class="lbl">Другие услуги</span></div><div class="others"><a href="web.html" style="--c:#5b7cff"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg>Сайты под ключ</a><a href="crm.html" style="--c:#ffc24b"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/></svg>CRM-системы</a><a href="accounting.html" style="--c:#3fe0b0"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M8 15h2M12 15h2M8 18h8"/></svg>Подключение бухгалтерии</a><a href="bots.html" style="--c:#b79bff"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 7V4M9 12h.01M15 12h.01M9.5 15.5h5"/></svg>Чат-боты</a><a href="seo.html" style="--c:#5b7cff"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5M8.5 12.5l2-2 1.5 1.5 2.5-3"/></svg>SEO и продвижение</a><a href="design.html" style="--c:#a78bfa"><svg viewBox="0 0 24 24"><path d="M12 3l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z"/><path d="M5 20h14"/></svg>UI/UX дизайн</a><a href="ai.html" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>ИИ-сайты</a><a href="reviews.html" style="--c:#ffc24b"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>Revika</a></div></div></section>
@@ -667,6 +689,45 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 // scroll progress
 (function(){const bar=document.getElementById('progress');if(!bar)return;const u=()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform=`scaleX(${h>0?scrollY/h:0})`;};addEventListener('scroll',u,{passive:true});u();})();
 
+</script>
+<script>
+// FAQ open/close animation: height via Web Animations (details can't transition height on its own), words revealed one by one
+(function(){
+  const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.faq details').forEach(d=>{
+    const sum=d.querySelector('summary');
+    // wrap each word of the answer in a span with its index
+    let n=0;[...d.children].filter(el=>el!==sum).forEach(el=>{
+      const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+      nodes.forEach(t=>{const f=document.createDocumentFragment();t.textContent.split(/(\s+)/).forEach(part=>{
+        if(!part)return;if(/^\s+$/.test(part)){f.append(part);return;}
+        const s=document.createElement('span');s.className='w';s.style.setProperty('--i',Math.min(n++,40));s.textContent=part;f.append(s);});
+        t.replaceWith(f);});
+    });
+    if(rm)return;
+    let anim=null;
+    sum.addEventListener('click',e=>{
+      e.preventDefault();
+      if(anim){anim.cancel();anim=null;}
+      const start=d.offsetHeight+'px';
+      if(!d.open){
+        d.open=true;d.classList.remove('closing');
+        const end=d.offsetHeight+'px';
+        d.classList.remove('beam','revealing');void d.offsetWidth;d.classList.add('beam','revealing');
+        anim=d.animate({height:[start,end]},{duration:520,easing:'cubic-bezier(.2,.8,.2,1)'});
+        const words=d.querySelectorAll('.w').length;
+        setTimeout(()=>d.classList.remove('revealing'),700+Math.min(words,40)*22);
+        setTimeout(()=>d.classList.remove('beam'),950);
+      }else{
+        d.classList.add('closing');d.classList.remove('revealing');
+        const end=sum.offsetHeight+(d.offsetHeight-d.clientHeight)+'px';
+        anim=d.animate({height:[start,end]},{duration:380,easing:'cubic-bezier(.5,0,.3,1)'});
+        anim.onfinish=()=>{d.open=false;d.classList.remove('closing');anim=null;};
+      }
+      if(anim&&d.open&&!d.classList.contains('closing'))anim.onfinish=()=>{anim=null;};
+    });
+  });
+})();
 </script>
 </body>
 </html>
