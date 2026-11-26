@@ -371,6 +371,58 @@ section > .wrap{position:relative;z-index:1}
 .pc.p3{top:176px;left:0;animation:card1 6s ease-in-out infinite;animation-delay:-4s}
 @keyframes card1{50%{transform:translateY(-8px)}}
 @keyframes card2{50%{transform:rotate(9deg) translateY(8px)}}
+
+
+/* Revika: real screenshots of the widget and the cabinet */
+.rv-sec h2 em{color:var(--sun)}
+.rv-lead{margin:18px 0 0;color:var(--muted);font-size:17px;line-height:1.6;max-width:62ch}
+.rv-lead b{color:var(--fg);font-weight:600}
+.rv-show{margin-top:8px}
+.rv-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.rv-tabs button{font:inherit;text-align:left;color:var(--fg);background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:16px;padding:14px 18px;cursor:pointer;display:grid;gap:2px;position:relative;overflow:hidden;transition:border-color .3s,background .3s}
+.rv-tabs button::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--sun);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.rv-tabs button[aria-selected="true"]{border-color:color-mix(in srgb,var(--sun) 60%,var(--line));background:color-mix(in srgb,var(--sun) 10%,transparent)}
+.rv-tabs button[aria-selected="true"]::after{transform:scaleX(1)}
+.rv-tabs b{font:600 16px var(--font-display)}
+.rv-tabs small{color:var(--muted);font-size:13px}
+.rv-stage{position:relative;display:grid}
+.rv-slide{grid-area:1/1;margin:0;position:relative;opacity:0;visibility:hidden;transform:translateY(14px) scale(.99);transition:opacity .45s,transform .55s cubic-bezier(.2,.8,.2,1),visibility 0s .45s}
+.rv-slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .45s,transform .55s cubic-bezier(.2,.8,.2,1)}
+.rv-browser{border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 40px 90px -40px color-mix(in srgb,var(--sun) 55%,transparent),0 0 0 1px rgba(255,255,255,.08)}
+.rv-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#e9e9ec;color:#555b6b;font:500 12px var(--font-mono)}
+.rv-bar i{width:10px;height:10px;border-radius:50%;background:#ff6b6b}.rv-bar i:nth-child(2){background:#ffc24b}.rv-bar i:nth-child(3){background:#3fe0b0}
+.rv-bar span{margin-left:10px;background:#fff;border-radius:6px;padding:3px 12px}
+.rv-browser img{display:block;width:100%;height:auto}
+.rv-slide[data-rv="0"] .rv-browser{margin-right:clamp(60px,14%,170px)}
+.rv-phone{position:absolute;right:0;bottom:-28px;width:clamp(130px,19%,220px);border-radius:30px;padding:8px;background:#111318;box-shadow:0 30px 60px -20px #000,0 0 0 1px rgba(255,255,255,.12)}
+.rv-phone img{display:block;width:100%;height:auto;border-radius:23px}
+.rv-slide figcaption{margin-top:22px;color:var(--muted);font-size:15px;max-width:70ch}
+.rv-slide[data-rv="0"] figcaption{margin-top:48px}
+.rv-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;margin-top:56px}
+.rv-grid > *{min-width:0}
+.rv-steps h3{font:600 20px var(--font-display);margin:0 0 18px}
+.rv-steps ol{list-style:none;margin:0;padding:0;display:grid;gap:18px;counter-reset:st}
+.rv-steps li{display:grid;grid-template-columns:40px 1fr;column-gap:14px;counter-increment:st}
+.rv-steps li::before{content:counter(st);grid-row:span 2;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--sun);color:var(--ink);font:700 15px var(--font-display)}
+.rv-steps li b{font-size:16px}
+.rv-steps li span{color:var(--muted);font-size:15px}
+.rv-feats{list-style:none;margin:0;padding:0;display:grid;gap:10px;align-content:start}
+.rv-feats li{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.03);color:var(--muted);font-size:14px}
+.rv-feats li > span{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:color-mix(in srgb,var(--sun) 18%,transparent);color:var(--sun);font-size:16px;font-family:"Noto Color Emoji","Apple Color Emoji","Segoe UI Emoji",var(--font-body)}
+.rv-feats b{display:block;color:var(--fg);font-size:15px;font-weight:600}
+.rv-cta{margin-top:48px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;padding:24px 28px;border-radius:22px;background:var(--sun);color:var(--ink)}
+.rv-cta p{margin:0;font-size:17px;font-weight:500;max-width:52ch}
+.rv-btns{display:flex;flex-wrap:wrap;gap:10px}
+.rv-cta .btn{background:var(--ink);border-color:var(--ink);color:#fff}
+.rv-cta .btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+@media (max-width:860px){
+  .rv-tabs{grid-template-columns:1fr 1fr 1fr;gap:6px}.rv-tabs button{padding:10px 12px}.rv-tabs small{display:none}.rv-tabs b{font-size:13px}
+  .rv-grid{grid-template-columns:1fr;gap:32px}
+  .rv-slide[data-rv="0"] .rv-browser{margin-right:22%}
+  .rv-phone{width:28%;top:56px;bottom:auto;border-radius:20px;padding:5px}.rv-slide[data-rv="0"] figcaption{margin-top:72px}.rv-phone img{border-radius:18px}
+  .rv-bar span{display:none}
+  .rv-cta{padding:22px}
+}
 .big-star{position:absolute;right:-40px;top:-50px;width:220px;height:220px;opacity:.25;animation:spin 30s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -432,6 +484,48 @@ section > .wrap{position:relative;z-index:1}
 .plan.hot li::before{color:var(--ink)}
 .plan .btn{justify-content:center}
 .ai-note{text-align:center;color:#c9c4e6;margin:24px 0 0;font-size:14px}
+/* AI block v2: no box, soft aura that fades into the page; pitch = alternative to expensive design */
+.ai-sec{position:relative;overflow-x:clip;padding-block:88px}
+.ai-aura{position:absolute;inset:-80px 0;pointer-events:none;z-index:0}
+.ai-aura i{position:absolute;border-radius:50%;filter:blur(110px);opacity:.38;animation:drift 18s ease-in-out infinite alternate}
+.ai-aura i:nth-child(1){width:560px;height:560px;background:var(--lilac);top:0;left:calc(50% - 620px)}
+.ai-aura i:nth-child(2){width:480px;height:480px;background:var(--pink);top:30%;right:calc(50% - 600px);opacity:.28;animation-duration:22s}
+.ai-aura i:nth-child(3){width:420px;height:420px;background:var(--sun);bottom:0;left:40%;opacity:.16;animation-duration:26s}
+.ai-sec > .wrap{position:relative;z-index:1}
+.ai-head{max-width:760px;margin:0 auto 44px}
+.ai-head h2{font-size:clamp(30px,4.6vw,54px);text-wrap:balance}
+.ai-head h2 em{display:inline}
+.ai-head p{font-size:17px;max-width:60ch;line-height:1.6}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;max-width:900px;margin:0 auto 40px}
+.vs-col{border-radius:26px;padding:28px 30px}
+.vs-col h3{font:600 18px var(--font-display);margin:0 0 18px}
+.vs-col dl{margin:0;display:grid;gap:14px}
+.vs-col dl div{display:grid;gap:2px}
+.vs-col dt{font:500 11px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;opacity:.6}
+.vs-col dd{margin:0;font-size:15px}
+.vs-old{background:rgba(255,255,255,.03);color:var(--muted)}
+.vs-old .vs-price{font:700 26px var(--font-display);letter-spacing:-.02em;text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--pink) 70%,transparent);text-decoration-thickness:2px}
+.vs-new{background:linear-gradient(150deg,color-mix(in srgb,var(--lilac) 34%,#15171e),color-mix(in srgb,var(--pink) 20%,#15171e));box-shadow:0 40px 90px -40px var(--pink),inset 0 0 0 1px rgba(255,255,255,.08);color:var(--fg);transform:scale(1.03)}
+.vs-new .vs-price{font:800 34px var(--font-display);letter-spacing:-.03em;background:linear-gradient(90deg,#fff,var(--sun));-webkit-background-clip:text;background-clip:text;color:transparent}
+.vs-mid{position:relative;z-index:2;width:52px;height:52px;margin:0 -14px;border-radius:50%;display:grid;place-items:center;font:800 15px var(--font-display);background:var(--sun);color:var(--ink);box-shadow:0 10px 30px -8px var(--sun)}
+.ai-steps{list-style:none;margin:0 auto 40px;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;font-size:14px;color:#c9c4e6;counter-reset:s}
+.ai-steps li{display:flex;align-items:center;gap:8px}
+.ai-steps li + li::before{content:"→";color:var(--sun);margin-right:20px}
+.ai-steps span{font-size:16px}
+.ai-steps b{color:#fff;font-weight:600}
+@media (max-width:760px){
+  .ai-sec{padding-block:64px}
+  .vs{grid-template-columns:1fr;gap:0}
+  .vs-mid{margin:-14px auto;justify-self:center}
+  .vs-new{transform:none}
+  .ai-steps{flex-direction:column;align-items:flex-start;max-width:340px;gap:10px}
+  .ai-steps li + li::before{content:"↓";margin-right:0;position:absolute;left:-22px}
+  .ai-steps li{position:relative}
+  .ai-steps{padding-left:22px}
+  .ai-steps li + li::before{display:none}
+  .ai-aura i{filter:blur(80px)}
+}
+
 .ai-note a{color:#fff}
 @media (max-width:760px){
   .ai-flow{flex-direction:column;gap:0}
@@ -948,40 +1042,101 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
     </div>
   </section>
 
-  <section id="revika" style="padding-top:0">
+  <section id="revika" class="rv-sec">
     <div class="wrap">
-      <a href="reviews.html" class="promo reveal">
-        <svg class="big-star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 2l12 34h36L69 58l11 36-30-22-30 22 11-36L2 36h36z" fill="#111318"/></svg>
+      <div class="sec-head reveal">
+        <div class="sec-label">Наш сервис · Revika</div>
         <div>
-          <div class="sec-label">Наш сервис · Revika</div>
-          <h2>Ваши <em>★ 4.9</em> прямо на сайте</h2>
-          <p>Revika сама собирает настоящие отзывы клиентов с Яндекс Карт, Google и 2ГИС и показывает их на вашем сайте.</p>
-          <span class="btn dark">Узнать про Revika <span aria-hidden="true">→</span></span>
+          <h2>Отзывы с карт — <em>прямо на вашем сайте</em></h2>
+          <p class="rv-lead">Revika — это блок отзывов для сайта клиники или любого бизнеса. Он собирает в одном месте отзывы с <b>Яндекс Карт, 2ГИС и ПроДокторов</b>, показывает общий рейтинг и раскладывает отзывы по врачам. Клиент читает живые отзывы у вас на сайте и не уходит на карты, где рядом стоят конкуренты.</p>
         </div>
-        <div class="promo-cards" aria-hidden="true">
-          <div class="pc p1"><span class="st">★★★★★</span><b>Анна К. · Яндекс</b>Всё вовремя и очень вкусно!</div>
-          <div class="pc p2"><span class="st">★★★★★</span><b>Дмитрий · Google</b>Ответили за 5 минут, доставка за час.</div>
-          <div class="pc p3"><span class="st">★★★★★</span><b>Ольга · 2ГИС</b>Уютно и вежливый персонал.</div>
+      </div>
+
+      <div class="rv-show reveal">
+        <div class="rv-tabs" role="tablist" aria-label="Как выглядит Revika">
+          <button type="button" role="tab" aria-selected="true" data-rv="0"><b>Блок на сайте</b><small>что видит клиент</small></button>
+          <button type="button" role="tab" aria-selected="false" data-rv="1"><b>Проверка отзывов</b><small>кабинет администратора</small></button>
+          <button type="button" role="tab" aria-selected="false" data-rv="2"><b>Оформление</b><small>под дизайн сайта</small></button>
         </div>
-      </a>
+        <div class="rv-stage">
+          <figure class="rv-slide on" data-rv="0">
+            <div class="rv-browser"><div class="rv-bar"><i></i><i></i><i></i><span>ваш-сайт.ru</span></div><img src="img/revika/widget-desktop.webp" alt="Блок Revika на сайте: рейтинги Яндекс Карт, 2ГИС и ПроДокторов, фильтры и карточки отзывов с лечащим врачом" width="1400" height="1005" loading="lazy" decoding="async"></div>
+            <div class="rv-phone"><img src="img/revika/widget-mobile.webp" alt="Тот же блок отзывов на телефоне" width="420" height="882" loading="lazy" decoding="async"></div>
+            <figcaption>Рейтинги площадок, кнопка «Оставить отзыв», фильтры и карусель отзывов. У каждого отзыва — лечащий врач и услуга. На телефоне карточки листаются пальцем.</figcaption>
+          </figure>
+          <figure class="rv-slide" data-rv="1">
+            <div class="rv-browser"><div class="rv-bar"><i></i><i></i><i></i><span>Кабинет Revika · Проверить</span></div><img src="img/revika/cabinet-check.webp" alt="Кабинет Revika: новые отзывы с кнопками «Показать на сайте» и «Не показывать»" width="1400" height="672" loading="lazy" decoding="async"></div>
+            <figcaption>Новые отзывы сначала попадают на проверку. Кабинет сам находит врача по фамилии в тексте, а вы нажимаете «Показать на сайте» или «Не показывать». Отзывы с низкой оценкой подсвечены — решение всегда за вами.</figcaption>
+          </figure>
+          <figure class="rv-slide" data-rv="2">
+            <div class="rv-browser"><div class="rv-bar"><i></i><i></i><i></i><span>Кабинет Revika · Оформление</span></div><img src="img/revika/cabinet-theme.webp" alt="Настройки оформления виджета Revika с живым превью" width="1400" height="901" loading="lazy" decoding="async"></div>
+            <figcaption>Цвета, шрифт, скругления и заголовок настраиваются в кабинете, превью меняется сразу. Блок выглядит как часть вашего сайта, а не как чужой виджет.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="rv-grid">
+        <div class="rv-steps reveal">
+          <h3>Как это работает</h3>
+          <ol>
+            <li><b>Подключаем</b><span>Вы присылаете ссылки на компанию на площадках и список врачей. Мы настраиваем кабинет и ставим блок на сайт.</span></li>
+            <li><b>Загружаете отзывы</b><span>Раз в неделю-две администратор нажимает одну кнопку на странице площадки, и новые отзывы попадают в кабинет.</span></li>
+            <li><b>Показываете лучшее</b><span>Отмечаете, что показывать. Отзыв сразу появляется на главной и на странице нужного врача.</span></li>
+          </ol>
+        </div>
+        <ul class="rv-feats reveal">
+          <li><span>👩‍⚕️</span><div><b>У каждого врача свои отзывы</b>на главной — все, на странице врача — только о нём</div></li>
+          <li><span>✓</span><div><b>Ничего не публикуется без вас</b>сначала проверка, потом сайт</div></li>
+          <li><span>📷</span><div><b>Фото и видео</b>фото с площадок подтягиваются сами, видео можно загрузить с телефона</div></li>
+          <li><span>⚡</span><div><b>Ставится за 5 минут</b>один кусочек кода: Тильда, WordPress, Битрикс, Wix</div></li>
+          <li><span>🔒</span><div><b>Без доступа к аккаунтам</b>не нужны пароли от Яндекса и 2ГИС</div></li>
+        </ul>
+      </div>
+
+      <div class="rv-cta reveal">
+        <p>Покажем Revika с отзывами вашей компании до оплаты — пришлите ссылку на сайт.</p>
+        <div class="rv-btns"><a class="btn" href="#contact" data-quick>Подключить Revika <span aria-hidden="true">→</span></a><a class="btn ghost" href="reviews.html">Подробнее о сервисе</a></div>
+      </div>
     </div>
   </section>
 
   <section id="ai" class="ai-sec">
-    <div class="wrap"><div class="ai-card">
-    <div class="ai-glow" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="ai-aura" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
       <div class="ai-head reveal">
-        <span class="ai-badge">✨ Новое · быстро и недорого</span>
-        <h2>Сайт с ИИ <em>за несколько дней</em></h2>
-        <p>Картинки генерирует ChatGPT, сайт собирает Claude, а мы проверяем, дорабатываем и запускаем. Подходит для старта, проверки идеи и небольшого бизнеса.</p>
+        <span class="ai-badge">✨ Альтернатива дорогому дизайну</span>
+        <h2>Выглядит как сайт от студии. <em>Стоит в разы меньше</em></h2>
+        <p>Индивидуальный дизайн — это недели работы и счёт от $1 000. Мы делаем иначе: картинки рисует ИИ, сайт собирает ИИ, а наша команда доводит результат до студийного уровня и запускает. Вы получаете современный сайт за несколько дней и по цене шаблона.</p>
       </div>
-      <div class="ai-flow reveal" aria-label="Как собирается ИИ-сайт">
-        <div class="ai-node"><span class="ai-ico">🎨</span><b>ChatGPT</b><small>картинки и баннеры</small></div>
-        <div class="ai-link" aria-hidden="true"><span></span></div>
-        <div class="ai-node"><span class="ai-ico">⚡</span><b>Claude</b><small>сборка сайта и тексты</small></div>
-        <div class="ai-link" aria-hidden="true"><span></span></div>
-        <div class="ai-node me"><span class="ai-ico">✓</span><b>itsme</b><small>проверка и запуск</small></div>
+
+      <div class="vs reveal" aria-label="Сравнение: дизайн в студии и ИИ-сайт от itsme">
+        <div class="vs-col vs-old">
+          <h3>Дизайн в студии</h3>
+          <dl>
+            <div><dt>Стоимость</dt><dd class="vs-price">от $1 000</dd></div>
+            <div><dt>Срок</dt><dd>3–6 недель</dd></div>
+            <div><dt>Картинки</dt><dd>фотосессия или фотостоки</dd></div>
+            <div><dt>Тексты</dt><dd>отдельно, у копирайтера</dd></div>
+          </dl>
+        </div>
+        <div class="vs-mid" aria-hidden="true">vs</div>
+        <div class="vs-col vs-new">
+          <h3>ИИ-сайт от itsme</h3>
+          <dl>
+            <div><dt>Стоимость</dt><dd class="vs-price">от $150</dd></div>
+            <div><dt>Срок</dt><dd>несколько дней</dd></div>
+            <div><dt>Картинки</dt><dd>уникальные, ИИ рисует под ваш бизнес</dd></div>
+            <div><dt>Тексты</dt><dd>включены: ИИ пишет, мы редактируем</dd></div>
+          </dl>
+        </div>
       </div>
+
+      <ol class="ai-steps reveal" aria-label="Как мы делаем ИИ-сайт">
+        <li><span>🎨</span><b>ChatGPT</b> рисует картинки и баннеры</li>
+        <li><span>⚡</span><b>Claude</b> собирает сайт и пишет тексты</li>
+        <li><span>✓</span><b>itsme</b> проверяет, дорабатывает и запускает</li>
+      </ol>
+
       <div class="ai-plans">
         <article class="plan reveal">
           <div class="plan-top"><h3>ИИ-сайт</h3><span class="plan-tag">лендинг или визитка</span></div>
@@ -1008,9 +1163,8 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
           <button class="btn dark" type="button" data-ai="ИИ-магазин за $300">Хочу магазин за $300 <span aria-hidden="true">→</span></button>
         </article>
       </div>
-      <p class="ai-note reveal">Нужно сложнее: свой дизайн, CRM, 1С, личные кабинеты? Это <a href="#services">классическая разработка</a>.</p>
+      <p class="ai-note reveal">Нужен уникальный дизайн, CRM, 1С или личные кабинеты? Это наша <a href="#services">классическая разработка</a>.</p>
     </div>
-  </div>
   </section>
 
   <section id="why" class="why-sec">
@@ -1411,6 +1565,12 @@ document.querySelectorAll('[data-ai]').forEach(b=>b.addEventListener('click',()=
   });
 })();
 
+
+// Revika screenshot tabs
+document.querySelectorAll('.rv-tabs button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.rv-tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  document.querySelectorAll('.rv-slide').forEach(f=>f.classList.toggle('on',f.dataset.rv===b.dataset.rv));
+}));
 // mobile menu
 (function(){
   const b=document.getElementById('burger'),m=document.getElementById('mnav');
