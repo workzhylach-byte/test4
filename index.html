@@ -205,7 +205,7 @@ h3{font-family:var(--font-display);font-weight:600;font-size:21px;line-height:1.
 .case.big .case-foot{color:var(--ink);opacity:.85;position:relative;z-index:1}
 .case.big .case-foot b{color:var(--ink)}
 .shot{border-radius:12px;overflow:hidden;aspect-ratio:5/3;max-width:100%;background:var(--bg);box-shadow:0 14px 30px -18px rgba(0,0,0,.6);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-.shot svg{display:block;width:100%;height:100%}
+.shot{position:relative;isolation:isolate}.shot-d{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}.shot::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 55%,rgba(10,11,16,.35));pointer-events:none}.shot-m{position:absolute;z-index:1;right:6%;top:13%;width:23%;aspect-ratio:390/844;border:3px solid #111318;border-radius:12px;overflow:hidden;background:#111318;box-shadow:0 12px 28px -6px rgba(0,0,0,.6)}.shot-m img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:9px}
 .case:hover .shot{transform:scale(1.03) translateY(-3px)}
 .case.big .shot{order:-1;margin:0 0 4px;aspect-ratio:5/3}
 .case.cta{justify-content:space-between}
@@ -234,12 +234,24 @@ h3{font-family:var(--font-display);font-weight:600;font-size:21px;line-height:1.
 @media (max-width:760px){.dir-tabs{grid-template-columns:1fr 1fr 1fr;gap:8px}.dir-tabs button{flex-direction:column;align-items:flex-start;gap:10px;padding:12px}.dir-tabs small{display:none}.dir-tabs .di{width:38px;height:38px;font-size:17px}.dir-tabs b{font-size:15px}}
 /* phone: long lists become horizontal swipe rows */
 .swipe-hint{display:none}
+.dots{display:none}
+@media (hover:none){.case:hover,.svc:hover,.case:hover .shot{transform:none}.case:hover .arrow{transform:none}}
 @media (max-width:760px){
   .services,.cases-big,.cases-cms{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-left:calc(-1 * var(--gut-l));margin-right:calc(-1 * var(--gut-r));padding:4px var(--gut-r) 18px var(--gut-l);scroll-padding-left:var(--gut-l);scrollbar-width:none;overscroll-behavior-x:contain}
   .services::-webkit-scrollbar,.cases-big::-webkit-scrollbar,.cases-cms::-webkit-scrollbar{display:none}
   .services > *,.cases-big > *,.cases-cms > *{flex:0 0 82%;scroll-snap-align:start}
   .cases-cms > *,.cases-big > *{flex-basis:66%}
   .cases-big{margin-bottom:4px}
+  .services,.cases-big,.cases-cms{position:relative;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;scroll-behavior:smooth}
+  .services::after,.cases-big::after,.cases-cms::after{content:"";flex:0 0 1px}
+  /* heavy effects off inside swipe rows: blur behind every card made scrolling stutter */
+  .services .svc,.cases-cms .case:not(.big){backdrop-filter:none;-webkit-backdrop-filter:none;background:#15171e}
+  .services > .reveal,.cases-big > .reveal,.cases-cms > .reveal{transform:none!important;transition:border-color .3s,background .3s}
+  .ambient i{animation:none}
+  .shot-m{border-width:2px;border-radius:8px}.shot-m img{border-radius:6px}
+  .dots{display:flex;justify-content:center;gap:6px;margin:2px 0 22px}
+  .dots button{width:8px;height:8px;padding:0;border:0;border-radius:999px;background:var(--line);cursor:pointer;transition:width .25s,background .25s}
+  .dots button[aria-current="true"]{width:22px;background:var(--fg)}
   .swipe-hint{display:flex;align-items:center;gap:8px;font:500 12px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:-20px 0 14px}
   .swipe-hint::after{content:"→";animation:nudge 1.4s ease-in-out infinite}
   @keyframes nudge{50%{transform:translateX(6px)}}
@@ -841,69 +853,74 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
       <div class="swipe-hint">Листайте</div>
       <div class="cases-big">
         <a class="case big reveal" data-kind="custom" href="https://secondtime.com" target="_blank" rel="noopener" style="--c:var(--sun)">
-          <div class="shot" data-d="secondtime.com" aria-hidden="true"></div>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/secondtime-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/secondtime-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="flag"><span class="fe">🇺🇸</span> США</span><span class="arrow" aria-hidden="true">↗</span></div>
           <h3>secondtime.com</h3>
           <p>Интернет-магазин и скуп премиальных часов</p>
           <div class="case-foot"><span>Дизайн · разработка</span><b>Python Django</b></div>
         </a>
         <a class="case big reveal" data-kind="custom" href="https://orbyjets.com" target="_blank" rel="noopener" style="--c:var(--accent)">
-          <div class="shot" data-d="orbyjets.com" aria-hidden="true"></div>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/orbyjets-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/orbyjets-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="flag"><span class="fe">🇫🇷</span> Франция</span><span class="arrow" aria-hidden="true">↗</span></div>
           <h3>orbyjets.com</h3>
           <p>Платформа бронирования, отслеживания рейсов и CRM для частной авиакомпании</p>
           <div class="case-foot"><span>Дизайн · разработка</span><b>Python Django</b></div>
         </a>
         <a class="case big reveal" data-kind="custom" href="https://grooming-school.online" target="_blank" rel="noopener" style="--c:var(--pink)">
-          <div class="shot" data-d="grooming-school.online" aria-hidden="true"></div>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/grooming-school-online-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/grooming-school-online-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="flag"><span class="fe">🇷🇸</span> Сербия</span><span class="arrow" aria-hidden="true">↗</span></div>
           <h3>grooming-school.online</h3>
           <p>Онлайн-школа: запись видеоуроков и личные кабинеты учеников</p>
           <div class="case-foot"><span>Разработка</span><b>Laravel</b></div>
         </a>
-        <a class="case big reveal" data-kind="custom" href="https://kastrans.net" target="_blank" rel="noopener" style="--c:var(--mint)">
-          <div class="shot" data-d="kastrans.net" aria-hidden="true"></div>
+        <a class="case big reveal" data-kind="custom" data-seo href="https://kastrans.net" target="_blank" rel="noopener" style="--c:var(--mint)">
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/kastrans-net-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/kastrans-net-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="flag"><span class="fe">🇵🇱</span> Польша</span><span class="arrow" aria-hidden="true">↗</span></div>
           <h3>kastrans.net</h3>
           <p>Продажа международных автобусных билетов и рабочая панель для диспетчеров</p>
-          <div class="case-foot"><span>Дизайн · разработка</span><b>Laravel</b></div>
+          <div class="case-foot"><span>Дизайн · разработка · SEO</span><b>Laravel</b></div>
         </a>
       </div>
       <div class="cases-cms">
         <a class="case reveal" data-kind="cms" href="https://domani.by" target="_blank" rel="noopener">
-          <div class="shot" data-d="domani.by" aria-hidden="true"></div>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/domani-by-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/domani-by-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="dom">domani.by</span><span class="arrow" aria-hidden="true">↗</span></div>
           <div class="case-foot"><span>Дизайн · вёрстка</span><b>Tilda</b></div>
         </a>
         <a class="case reveal" data-kind="cms" href="https://daoonline.ru" target="_blank" rel="noopener">
-          <div class="shot" data-d="daoonline.ru" aria-hidden="true"></div>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/daoonline-ru-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/daoonline-ru-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="dom">daoonline.ru</span><span class="arrow" aria-hidden="true">↗</span></div>
           <div class="case-foot"><span>Дизайн · вёрстка</span><b>1С-Bitrix</b></div>
         </a>
         <a class="case reveal" data-kind="cms" href="https://nautikone.com" target="_blank" rel="noopener">
-          <div class="shot" data-d="nautikone.com" aria-hidden="true"></div>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/nautikone-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/nautikone-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="dom">nautikone.com</span><span class="arrow" aria-hidden="true">↗</span></div>
           <div class="case-foot"><span>Дизайн · вёрстка</span><b>WordPress</b></div>
         </a>
         <a class="case reveal" data-kind="cms" href="https://coppingjoyce.co.uk" target="_blank" rel="noopener">
-          <div class="shot" data-d="coppingjoyce.co.uk" aria-hidden="true"></div>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/coppingjoyce-co-uk-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/coppingjoyce-co-uk-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="dom">coppingjoyce.co.uk</span><span class="arrow" aria-hidden="true">↗</span></div>
           <div class="case-foot"><span>Дизайн · вёрстка</span><b>WordPress</b></div>
         </a>
         <a class="case reveal" data-kind="cms" href="https://swanlake-capital.com" target="_blank" rel="noopener">
-          <div class="shot" data-d="swanlake-capital.com" aria-hidden="true"></div>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/swanlake-capital-com-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/swanlake-capital-com-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="dom">swanlake-capital.com</span><span class="arrow" aria-hidden="true">↗</span></div>
           <div class="case-foot"><span>Дизайн · вёрстка</span><b>WordPress</b></div>
         </a>
         <a class="case reveal" data-kind="cms" data-seo href="https://grooming-online.ru" target="_blank" rel="noopener">
-          <div class="shot" data-d="grooming-online.ru" aria-hidden="true"></div>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/grooming-online-ru-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/grooming-online-ru-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="dom">grooming-online.ru</span><span class="arrow" aria-hidden="true">↗</span></div>
           <div class="case-foot"><span>Дизайн · вёрстка · SEO</span><b>WordPress · WooCommerce · Tutor LMS</b></div>
         </a>
         <a class="case reveal" data-kind="cms" data-seo href="https://ladan.by" target="_blank" rel="noopener">
-          <div class="shot" data-d="ladan.by" aria-hidden="true"></div>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/ladan-by-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/ladan-by-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
           <div class="case-top"><span class="dom">ladan.by</span><span class="arrow" aria-hidden="true">↗</span></div>
           <div class="case-foot"><span>Дизайн · вёрстка · SEO</span><b>WordPress · WooCommerce</b></div>
+        </a>
+        <a class="case reveal" data-kind="cms" data-seo data-seo-only href="https://nordwave.ru" target="_blank" rel="noopener" hidden>
+          <div class="shot" aria-hidden="true"><img class="shot-d" src="img/cases/nordwave-ru-desktop.webp" alt="" width="960" height="599" loading="lazy" decoding="async"><span class="shot-m"><img src="img/cases/nordwave-ru-mobile.webp" alt="" width="390" height="844" loading="lazy" decoding="async"></span></div>
+          <div class="case-top"><span class="dom">nordwave.ru</span><span class="arrow" aria-hidden="true">↗</span></div>
+          <div class="case-foot"><span>SEO-продвижение</span><b>WordPress</b></div>
         </a>
         <a class="case cta reveal" data-kind="cms" href="#contact" data-quick>
           <div class="case-top"><span class="dom">Ваш проект</span><span class="arrow" aria-hidden="true">+</span></div>
@@ -1128,7 +1145,8 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 // scroll reveal: only elements below the first screen wait; transform only, so text is always visible
 (function(){
   if(reduce||!('IntersectionObserver' in window)) return;
-  const els=[...document.querySelectorAll('.reveal')].filter(el=>el.getBoundingClientRect().top>innerHeight);
+  const phone=matchMedia('(max-width:760px)').matches;
+  const els=[...document.querySelectorAll('.reveal')].filter(el=>el.getBoundingClientRect().top>innerHeight&&!(phone&&el.parentElement.matches('.services,.cases-big,.cases-cms')));
   els.forEach(el=>el.classList.add('wait'));
   const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){
     const sib=[...en.target.parentElement.children].filter(c=>c.classList.contains('reveal'));
@@ -1340,11 +1358,16 @@ document.querySelectorAll('.dir-tabs button').forEach(b=>b.addEventListener('cli
   document.querySelectorAll('.dir-tabs button').forEach(x=>x.setAttribute('aria-selected',x===b));
   const f=b.dataset.f;
   document.getElementById('ai-empty').hidden=f!=='ai';
-  document.querySelectorAll('.case[href^="https"]').forEach(c=>c.hidden=f==='ai'||(f==='seo'&&!c.hasAttribute('data-seo')));
-  document.querySelector('.cases-big').hidden=f!=='dev';
+  document.querySelectorAll('.case[href^="https"]').forEach(c=>c.hidden=f==='ai'||(f==='seo'&&!c.hasAttribute('data-seo'))||(f==='dev'&&c.hasAttribute('data-seo-only')));
+  const big=document.querySelector('.cases-big'),cms=document.querySelector('.cases-cms');
+  // SEO: collect the SEO projects in one row instead of a lonely big card
+  big.__home=big.__home||[...big.querySelectorAll('.case[data-seo]')].map(c=>[c,c.nextElementSibling]);
+  big.__home.forEach(([c,next])=>{if(f==='seo')cms.prepend(c);else big.insertBefore(c,next&&next.parentElement===big?next:null);});
+  big.hidden=f!=='dev';
   document.querySelector('.cases-cms').hidden=f==='ai';
-  document.querySelectorAll('#cases .swipe-hint').forEach(h=>h.hidden=f!=='dev');
+  document.querySelectorAll('#cases .swipe-hint').forEach(h=>h.hidden=f==='ai');
   const cta=document.querySelector('.case.cta');if(cta)cta.hidden=f==='ai';
+  document.querySelectorAll('.cases-big,.cases-cms').forEach(r=>{r.scrollLeft=0;r.__dots&&r.__dots();});
 }));
 // AI plan buttons open the quick form with a ready message
 document.querySelectorAll('[data-ai]').forEach(b=>b.addEventListener('click',()=>{
@@ -1352,50 +1375,21 @@ document.querySelectorAll('[data-ai]').forEach(b=>b.addEventListener('click',()=
   document.getElementById('q-note').textContent='';openModal(mQuick);
 }));
 
-// illustrated covers for case cards (browser frame + motif per project)
+// phone swipe rows: dots that show the current card and jump on tap
 (function(){
-  const M={
-    watch:(a,f)=>`<circle cx="300" cy="128" r="54" fill="none" stroke="${a}" stroke-width="7"/><circle cx="300" cy="128" r="44" fill="${f}" opacity=".08"/><path d="M300 128V96M300 128l22 12" stroke="${a}" stroke-width="5" stroke-linecap="round"/><rect x="284" y="58" width="32" height="18" rx="4" fill="${a}"/><rect x="284" y="180" width="32" height="18" rx="4" fill="${a}"/>`,
-    plane:(a,f)=>`<path d="M220 190 Q300 70 380 110" stroke="${f}" stroke-width="2" stroke-dasharray="5 7" fill="none" opacity=".5"/><g transform="translate(318 98) rotate(-20)"><path d="M-34 0 L30 -5 Q42 0 30 5 Z" fill="${a}"/><path d="M-4 -3 L-20 -26 L-10 -26 L12 -3 Z M-4 3 L-20 26 L-10 26 L12 3 Z M-30 -2 L-38 -14 L-32 -14 L-22 -2 Z" fill="${a}"/></g><circle cx="220" cy="190" r="6" fill="${a}"/>`,
-    play:(a,f)=>`<rect x="232" y="70" width="140" height="84" rx="10" fill="${a}"/><path d="M292 96 L316 112 L292 128 Z" fill="${f}"/><rect x="232" y="164" width="42" height="26" rx="5" fill="${f}" opacity=".18"/><rect x="281" y="164" width="42" height="26" rx="5" fill="${f}" opacity=".18"/><rect x="330" y="164" width="42" height="26" rx="5" fill="${f}" opacity=".18"/>`,
-    bus:(a,f)=>`<rect x="226" y="78" width="140" height="76" rx="14" fill="${a}"/><rect x="238" y="90" width="30" height="26" rx="4" fill="${f}" opacity=".85"/><rect x="274" y="90" width="30" height="26" rx="4" fill="${f}" opacity=".85"/><rect x="310" y="90" width="44" height="26" rx="4" fill="${f}" opacity=".85"/><circle cx="256" cy="156" r="11" fill="${f}"/><circle cx="336" cy="156" r="11" fill="${f}"/><rect x="246" y="178" width="100" height="26" rx="6" fill="none" stroke="${a}" stroke-width="2" stroke-dasharray="4 4"/>`,
-    house:(a,f)=>`<path d="M240 130 L300 80 L360 130 V190 H240 Z" fill="${a}"/><rect x="286" y="150" width="28" height="40" rx="3" fill="${f}"/><rect x="254" y="138" width="22" height="20" rx="3" fill="${f}" opacity=".8"/><rect x="324" y="138" width="22" height="20" rx="3" fill="${f}" opacity=".8"/>`,
-    leaf:(a,f)=>`<path d="M300 70 C360 90 370 160 300 196 C230 160 240 90 300 70 Z" fill="${a}"/><path d="M300 78 V192" stroke="${f}" stroke-width="3" opacity=".6"/><circle cx="300" cy="133" r="78" fill="none" stroke="${a}" stroke-width="2" opacity=".35"/>`,
-    wave:(a,f)=>`<path d="M220 150 Q250 120 280 150 T340 150 T400 150 V200 H220Z" fill="${a}" opacity=".85"/><path d="M262 140 L300 64 L300 140 Z" fill="${f}"/><path d="M304 76 L336 136 L304 136 Z" fill="${f}" opacity=".7"/><rect x="250" y="138" width="96" height="10" rx="5" fill="${f}"/>`,
-    scales:(a,f)=>`<rect x="244" y="150" width="20" height="40" rx="3" fill="${a}" opacity=".5"/><rect x="272" y="126" width="20" height="64" rx="3" fill="${a}" opacity=".7"/><rect x="300" y="104" width="20" height="86" rx="3" fill="${a}"/><rect x="328" y="80" width="20" height="110" rx="3" fill="${a}"/><path d="M240 140 L282 112 L310 120 L356 74" stroke="${f}" stroke-width="3" fill="none"/>`,
-    swan:(a,f)=>`<path d="M250 170 Q300 196 356 166 Q330 140 300 152 Q312 110 290 92 Q276 84 272 98 Q290 104 284 132 Q262 150 250 170Z" fill="${a}"/><path d="M226 186 Q300 206 380 186" stroke="${a}" stroke-width="3" fill="none" opacity=".5"/>`,
-    scissors:(a,f)=>`<circle cx="270" cy="160" r="18" fill="none" stroke="${a}" stroke-width="6"/><circle cx="330" cy="160" r="18" fill="none" stroke="${a}" stroke-width="6"/><path d="M282 146 L330 74 M318 146 L270 74" stroke="${a}" stroke-width="7" stroke-linecap="round"/>`,
-    smoke:(a,f)=>`<path d="M300 186 C270 160 330 140 300 112 C276 90 320 74 300 56" stroke="${a}" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M272 186 H328 L320 200 H280 Z" fill="${a}"/><circle cx="300" cy="130" r="70" fill="${a}" opacity=".08"/>`
-  };
-  const P={
-    'secondtime.com':{bg:'#0f1115',fg:'#f1e7cf',a:'#d4a84b',m:'watch',h:'Premium watches'},
-    'orbyjets.com':{bg:'#0b1630',fg:'#e8eeff',a:'#8fb0ff',m:'plane',h:'Private jets'},
-    'grooming-school.online':{bg:'#fff3f7',fg:'#2a1420',a:'#ff4f8b',m:'play',h:'Online school'},
-    'kastrans.net':{bg:'#eafff7',fg:'#0d2b22',a:'#17b886',m:'bus',h:'Bus tickets'},
-    'domani.by':{bg:'#f4f1ff',fg:'#1d1640',a:'#6d5bff',m:'house',h:'domani'},
-    'daoonline.ru':{bg:'#f1fbf2',fg:'#15301b',a:'#3c9a52',m:'leaf',h:'DAO'},
-    'nautikone.com':{bg:'#eaf6ff',fg:'#0b2236',a:'#1f86d6',m:'wave',h:'Nautikone'},
-    'coppingjoyce.co.uk':{bg:'#f6f5f0',fg:'#1f2430',a:'#2f4c7a',m:'scales',h:'Copping Joyce'},
-    'swanlake-capital.com':{bg:'#0e1622',fg:'#e9eef7',a:'#c9d6ea',m:'swan',h:'Swanlake Capital'},
-    'grooming-online.ru':{bg:'#fff6ec',fg:'#2d1a08',a:'#f08a24',m:'scissors',h:'Grooming'},
-    'ladan.by':{bg:'#fbf6ee',fg:'#2b2116',a:'#b07a3c',m:'smoke',h:'Ladan'}
-  };
-  document.querySelectorAll('.shot[data-d]').forEach((el,k)=>{
-    const d=el.dataset.d,c=P[d]||{bg:'#15171e',fg:'#eef0f6',a:'#5b7cff',m:'leaf',h:d},id='g'+k;
-    el.innerHTML=`<svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Обложка проекта ${d}">
-      <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c.a}" stop-opacity=".22"/><stop offset="1" stop-color="${c.a}" stop-opacity="0"/></linearGradient></defs>
-      <rect width="400" height="240" fill="${c.bg}"/><rect width="400" height="240" fill="url(#${id})"/>
-      <rect width="400" height="26" fill="${c.fg}" opacity=".07"/>
-      <circle cx="14" cy="13" r="4" fill="#ff6fa3"/><circle cx="27" cy="13" r="4" fill="#ffc24b"/><circle cx="40" cy="13" r="4" fill="#3fe0b0"/>
-      <rect x="120" y="6" width="160" height="14" rx="7" fill="${c.fg}" opacity=".08"/>
-      <text x="200" y="16.5" text-anchor="middle" font-family="Onest,system-ui,sans-serif" font-size="8.5" fill="${c.fg}" opacity=".7">${d}</text>
-      <rect x="24" y="40" width="40" height="7" rx="3.5" fill="${c.a}"/><rect x="250" y="41" width="28" height="5" rx="2.5" fill="${c.fg}" opacity=".25"/><rect x="286" y="41" width="28" height="5" rx="2.5" fill="${c.fg}" opacity=".25"/><rect x="322" y="41" width="28" height="5" rx="2.5" fill="${c.fg}" opacity=".25"/><rect x="358" y="39" width="22" height="9" rx="4.5" fill="${c.a}"/>
-      <text x="24" y="98" font-family="Unbounded,Onest,system-ui,sans-serif" font-weight="800" font-size="19" fill="${c.fg}">${c.h}</text>
-      <rect x="24" y="112" width="150" height="6" rx="3" fill="${c.fg}" opacity=".22"/><rect x="24" y="124" width="120" height="6" rx="3" fill="${c.fg}" opacity=".22"/><rect x="24" y="136" width="136" height="6" rx="3" fill="${c.fg}" opacity=".22"/>
-      <rect x="24" y="156" width="72" height="20" rx="10" fill="${c.a}"/><rect x="104" y="156" width="56" height="20" rx="10" fill="none" stroke="${c.fg}" stroke-opacity=".3"/>
-      ${M[c.m](c.a,c.fg)}
-      <rect x="0" y="214" width="400" height="26" fill="${c.fg}" opacity=".04"/>
-    </svg>`;
+  document.querySelectorAll('.services,.cases-big,.cases-cms').forEach(row=>{
+    const nav=document.createElement('div');nav.className='dots';nav.setAttribute('aria-hidden','true');
+    row.after(nav);
+    let items=[],raf=0;
+    const active=()=>{let best=0,dist=1e9;items.forEach((el,i)=>{const d=Math.abs(el.offsetLeft-row.scrollLeft-parseFloat(getComputedStyle(row).scrollPaddingLeft||0));if(d<dist){dist=d;best=i;}});
+      if(row.scrollLeft+row.clientWidth>=row.scrollWidth-4)best=items.length-1;
+      [...nav.children].forEach((b,i)=>b.setAttribute('aria-current',i===best));};
+    row.__dots=()=>{items=[...row.children].filter(el=>!el.hidden);nav.hidden=row.hidden||items.length<2;
+      nav.innerHTML='';items.forEach((el,i)=>{const b=document.createElement('button');b.type='button';b.tabIndex=-1;
+        b.addEventListener('click',()=>row.scrollTo({left:el.offsetLeft-parseFloat(getComputedStyle(row).scrollPaddingLeft||0),behavior:reduce?'auto':'smooth'}));nav.append(b);});
+      active();};
+    row.addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;active();});},{passive:true});
+    row.__dots();
   });
 })();
 
