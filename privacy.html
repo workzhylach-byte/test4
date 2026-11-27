@@ -36,7 +36,7 @@ a{color:inherit}
 .band::after{content:"";position:absolute;width:360px;height:360px;border-radius:50%;border:2px solid rgba(255,255,255,.4);right:-90px;top:-140px;animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .eyebrow{font:500 13px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;opacity:.75}
-h1{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,5.4vw,64px);line-height:1.02;letter-spacing:-.03em;margin:16px 0 0;text-wrap:balance;overflow-wrap:break-word;hyphens:auto}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,5.4vw,64px);line-height:1.02;letter-spacing:-.03em;margin:16px 0 0;text-wrap:balance;overflow-wrap:normal;hyphens:manual}
 .meta{margin-top:18px;font-size:15px;opacity:.8}
 .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
 .tabs a{text-decoration:none;font-size:14px;font-weight:500;padding:8px 14px;border-radius:999px;border:1.5px solid var(--ink)}
@@ -65,6 +65,9 @@ footer a{text-decoration:none}
 footer a:hover{color:var(--fg)}
 @media (max-width:860px){.layout{grid-template-columns:1fr;gap:28px;padding-block:36px 72px}.toc{position:static;border:1px solid var(--line);border-radius:16px;padding:16px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}html{scroll-behavior:auto}}
+.f-contacts{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-block:0 22px;font-size:14px}
+.f-contacts a{color:var(--fg);text-decoration:none}.f-contacts a:hover{color:var(--accent)}
+.f-req{color:var(--muted);font-size:13px;flex-basis:100%}
 </style>
 </head>
 <body>
@@ -82,7 +85,7 @@ footer a:hover{color:var(--fg)}
   <article class="doc">
     <div class="notice"><strong>Шаблон документа.</strong> Подставьте реквизиты компании в выделенные поля и согласуйте текст с юристом перед публикацией.</div>
     <h2 id="s1"><span>01</span>Общие положения</h2>
-    <p>Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей сайта itsme.by и сервиса Revika (далее — Сайт).</p><p>Оператор персональных данных: <span class="fill">[наименование организации или ИП]</span>, УНП <span class="fill">[УНП]</span>, адрес: <span class="fill">[юридический адрес]</span>, e-mail: <span class="fill">[почта]</span> (далее — Оператор).</p><p>Политика разработана в соответствии с Законом Республики Беларусь от 7 мая 2021 г. № 99-З «О защите персональных данных» и иным законодательством Республики Беларусь.</p>
+    <p>Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей сайта itsme.by и сервиса Revika (далее — Сайт).</p><p>Оператор персональных данных: Жилач Александр Сергеевич, плательщик налога на профессиональный доход, УНП ME6559955, адрес: Республика Беларусь, Могилёвская обл., г. Могилёв, ул. Турова, д. 24, кв. 13, e-mail: <a href="mailto:hello@itsme.by">hello@itsme.by</a> (далее — Оператор).</p><p>Политика разработана в соответствии с Законом Республики Беларусь от 7 мая 2021 г. № 99-З «О защите персональных данных» и иным законодательством Республики Беларусь.</p>
     <h2 id="s2"><span>02</span>Какие данные мы обрабатываем</h2>
     <p>Мы обрабатываем только те данные, которые вы сами указываете в формах на Сайте:</p><ul><li>имя;</li><li>номер телефона, имя пользователя в мессенджере (Telegram, WhatsApp, Viber, MAX) или адрес электронной почты;</li><li>текст сообщения и сведения о проекте;</li><li>выбранные дата и время созвона.</li></ul><p>Также могут обрабатываться технические данные: IP-адрес, сведения о браузере и устройстве, файлы cookie (подробнее в Политике cookie).</p>
     <h2 id="s3"><span>03</span>Цели обработки</h2>
@@ -90,17 +93,17 @@ footer a:hover{color:var(--fg)}
     <h2 id="s4"><span>04</span>Правовые основания</h2>
     <p>Обработка осуществляется на основании вашего согласия, которое вы даёте, отмечая соответствующий пункт в форме, а также для заключения и исполнения договора, стороной которого вы являетесь.</p>
     <h2 id="s5"><span>05</span>Срок хранения</h2>
-    <p>Данные из заявок хранятся не дольше, чем это нужно для целей обработки, но не более <span class="fill">[срок, например 3 года]</span> с момента последнего обращения, если более длительный срок не установлен законодательством.</p>
+    <p>Данные из заявок хранятся не дольше, чем это нужно для целей обработки, но не более 3 (трёх) лет с момента последнего обращения, если более длительный срок не установлен законодательством.</p>
     <h2 id="s6"><span>06</span>Передача третьим лицам</h2>
-    <p>Мы не продаём и не передаём ваши данные третьим лицам, кроме случаев, предусмотренных законодательством. Для работы Сайта могут привлекаться уполномоченные лица (хостинг, CRM, сервисы рассылок): <span class="fill">[перечень сервисов]</span>. Они обрабатывают данные только по нашему поручению.</p>
+    <p>Мы не продаём и не передаём ваши данные третьим лицам, кроме случаев, предусмотренных законодательством. Для работы Сайта могут привлекаться уполномоченные лица (хостинг, CRM, сервисы рассылок): хостинг-провайдер сайта, сервисы электронной почты и мессенджеры, через которые мы отвечаем на заявки. Они обрабатывают данные только по нашему поручению.</p>
     <h2 id="s7"><span>07</span>Ваши права</h2>
     <p>Вы имеете право:</p><ul><li>в любой момент отозвать согласие на обработку данных;</li><li>получить информацию об обработке ваших данных;</li><li>потребовать изменить, дополнить или удалить ваши данные;</li><li>получить сведения о передаче данных третьим лицам;</li><li>обжаловать действия Оператора в Национальный центр защиты персональных данных Республики Беларусь.</li></ul>
     <h2 id="s8"><span>08</span>Защита данных</h2>
     <p>Оператор принимает правовые, организационные и технические меры для защиты данных от несанкционированного доступа, изменения, распространения и уничтожения.</p>
     <h2 id="s9"><span>09</span>Контакты</h2>
-    <p>По вопросам обработки персональных данных пишите на <span class="fill">[почта]</span> или по адресу <span class="fill">[почтовый адрес]</span>. Мы ответим в срок, установленный законодательством.</p>
+    <p>По вопросам обработки персональных данных пишите на <a href="mailto:hello@itsme.by">hello@itsme.by</a> или по адресу Республика Беларусь, Могилёвская обл., г. Могилёв, ул. Турова, д. 24, кв. 13. Мы ответим в срок, установленный законодательством.</p>
   </article>
 </main>
-<footer><div class="wrap"><span>© 2026 itsme.by · Веб-студия</span><nav><a href="privacy.html">Политика конфиденциальности</a><a href="cookies.html">Cookie</a><a href="terms.html">Пользовательское соглашение</a><a href="about.html">О нас</a><a href="contacts.html">Контакты</a><a href="blog.html">Блог</a><a href="reviews.html">★ Revika</a></nav></div></footer>
+<footer><div class="wrap"><span>© 2026 itsme.by · Веб-студия</span><nav><a href="privacy.html">Политика конфиденциальности</a><a href="cookies.html">Cookie</a><a href="terms.html">Пользовательское соглашение</a></nav></div><div class="wrap"><div class="f-contacts"><a href="tel:+375291653052">+375 29 165-30-52</a><a href="mailto:hello@itsme.by">hello@itsme.by</a><a href="https://t.me/alexanderzhilach" target="_blank" rel="noopener">Telegram</a><a href="https://max.ru/u/f9LHodD0cOIC1ykP9E8yR5FU4hH5XPT8cXQweJvMDvUj7GxMumqct4l8rJM" target="_blank" rel="noopener">MAX</a><span class="f-req">Жилач Александр Сергеевич · плательщик НПД · УНП ME6559955</span></div></div></footer>
 </body>
 </html>

@@ -155,7 +155,7 @@ section{padding-block:96px;position:relative}
 .sec-label{font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:10px}
 h2{font-family:var(--font-display);font-weight:600;font-size:clamp(30px,4.6vw,56px);line-height:1.05;letter-spacing:-.03em;margin:0;text-wrap:balance}
 h2 em{font-style:normal;color:var(--accent)}
-h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
+h1,h2,h3{overflow-wrap:normal;hyphens:manual}
 h3{font-family:var(--font-display);font-weight:600;font-size:21px;line-height:1.2;letter-spacing:-.01em;margin:0}
 
 /* services */
@@ -731,6 +731,13 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
 .crm-tz-bar span{margin-left:8px;background:#fff;border-radius:6px;padding:2px 10px}
 .crm-tz-shot img{display:block;width:100%;height:auto}
 @media (max-width:860px){.crm-tz{grid-template-columns:1fr}.crm-tz-shot{transform:none}}
+.nav .crm-pill{color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px;font-weight:600}.nav .crm-pill:hover{color:#fff}
+.m-crm{color:var(--accent);font-size:17px}
+.nav a,.nav .dd-btn,.top .btn{white-space:nowrap}
+@media (max-width:1180px){.nav{gap:14px!important;font-size:14px!important}.nav .revika,.nav .crm-pill{padding:5px 10px}}
+.f-contacts{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-block:0 22px;font-size:14px}
+.f-contacts a{color:var(--fg);text-decoration:none}.f-contacts a:hover{color:var(--accent)}
+.f-req{color:var(--muted);font-size:13px;flex-basis:100%}
 </style>
 
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
@@ -742,12 +749,12 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
   <div class="wrap">
     <a class="logo" href="#top" aria-label="itsme — на главную"><span class="lg-its">its</span><span class="lg-me">me</span><span class="lg-caret" aria-hidden="true"></span></a>
     <nav class="nav" aria-label="Основное меню">
-      <div class="dd" id="dd-svc"><button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-panel">Услуги <svg class="dd-caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button><div class="dd-panel" id="dd-panel"><div class="dd-grid"><a class="dd-item" href="web.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span><span><b>Сайты под ключ</b><small>Лендинги и корпоративные сайты</small></span></a><a class="dd-item" href="shop.html" style="--ic:#38bdf8"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 9h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span><span><b>Интернет-магазины</b><small>Каталог, корзина, оплата</small></span></a><a class="dd-item" href="crm.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 17l-3-3"/></svg></span><span><b>CRM-системы</b><small>Своя CRM любой сложности, Bitrix24, amoCRM</small></span></a><a class="dd-item" href="accounting.html" style="--ic:#3fe0b0"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h8M8 17h5"/></svg></span><span><b>Подключение бухгалтерии</b><small>Обмен с 1С</small></span></a><a class="dd-item" href="bots.html" style="--ic:#b79bff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 7V4M9 12h.01M15 12h.01"/></svg></span><span><b>Чат-боты</b><small>Telegram, Viber, чат на сайте</small></span></a><a class="dd-item" href="seo.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span><b>SEO и продвижение</b><small>Поиск, аналитика, реклама</small></span></a><a class="dd-item" href="design.html" style="--ic:#a78bfa"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z"/></svg></span><span><b>UI/UX дизайн</b><small>Figma, фирменный стиль</small></span></a><a class="dd-item" href="ai.html" style="--ic:#c084fc"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/></svg></span><span><b>ИИ-сайты</b><small>Сайт $150 · магазин $300</small></span></a><a class="dd-item" href="reviews.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span><b>Revika</b><small>Отзывы с карт на вашем сайте</small></span></a></div><a class="dd-all" href="#services">Все услуги на главной →</a></div></div>
-      <a href="#cases">Кейсы</a><a href="marketplace.html">Маркетплейс</a>
+      <div class="dd" id="dd-svc"><button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-panel">Услуги <svg class="dd-caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button><div class="dd-panel" id="dd-panel"><div class="dd-grid"><a class="dd-item" href="web.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span><span><b>Сайты под ключ</b><small>Лендинги и корпоративные сайты</small></span></a><a class="dd-item" href="shop.html" style="--ic:#38bdf8"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 9h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span><span><b>Интернет-магазины</b><small>Каталог, корзина, оплата</small></span></a><a class="dd-item" href="crm.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 17l-3-3"/></svg></span><span><b>CRM-системы</b><small>Своя CRM любой сложности, Bitrix24, amoCRM</small></span></a><a class="dd-item" href="accounting.html" style="--ic:#3fe0b0"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h8M8 17h5"/></svg></span><span><b>Подключение бухгалтерии</b><small>Обмен с 1С</small></span></a><a class="dd-item" href="bots.html" style="--ic:#b79bff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 7V4M9 12h.01M15 12h.01"/></svg></span><span><b>Чат-боты</b><small>Telegram, Viber, чат на сайте</small></span></a><a class="dd-item" href="mobile.html" style="--ic:#ff9f6b"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><span><b>Мобильные приложения</b><small>iOS и Android под ваш бизнес</small></span></a><a class="dd-item" href="seo.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span><b>SEO-продвижение</b><small>Вывод сайта в поиск Яндекса и Google</small></span></a><a class="dd-item" href="design.html" style="--ic:#a78bfa"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z"/></svg></span><span><b>UI/UX дизайн</b><small>Figma, фирменный стиль</small></span></a><a class="dd-item" href="ai.html" style="--ic:#c084fc"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/></svg></span><span><b>ИИ-сайты</b><small>Сайт $150 · магазин $300</small></span></a><a class="dd-item" href="reviews.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span><b>Revika</b><small>Отзывы с карт на вашем сайте</small></span></a></div><a class="dd-all" href="#services">Все услуги на главной →</a></div></div>
+      <a href="cases.html">Кейсы</a><a href="marketplace.html">Маркетплейс</a>
       <a href="about.html">О нас</a>
       <a href="blog.html">Блог</a>
       <a href="contacts.html">Контакты</a>
-      <a class="revika" href="reviews.html">★ Revika</a>
+      <a class="revika" href="reviews.html">★ Revika</a><a class="crm-pill" href="crm-primer.html">CRM</a>
     </nav>
     <div class="top-actions">
       <a class="btn" href="#contact" data-quick>Обсудить проект</a>
@@ -755,13 +762,14 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
     </div>
   </div>
   <nav class="mnav" id="mnav" aria-label="Мобильное меню" hidden>
-    <details class="m-sub"><summary>Услуги <svg class="dd-caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></summary><div class="m-sub-list"><a class="m-item" href="web.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span><span><b>Сайты под ключ</b><small>Лендинги и корпоративные сайты</small></span></a><a class="m-item" href="shop.html" style="--ic:#38bdf8"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 9h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span><span><b>Интернет-магазины</b><small>Каталог, корзина, оплата</small></span></a><a class="m-item" href="crm.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 17l-3-3"/></svg></span><span><b>CRM-системы</b><small>Своя CRM любой сложности, Bitrix24, amoCRM</small></span></a><a class="m-item" href="accounting.html" style="--ic:#3fe0b0"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h8M8 17h5"/></svg></span><span><b>Подключение бухгалтерии</b><small>Обмен с 1С</small></span></a><a class="m-item" href="bots.html" style="--ic:#b79bff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 7V4M9 12h.01M15 12h.01"/></svg></span><span><b>Чат-боты</b><small>Telegram, Viber, чат на сайте</small></span></a><a class="m-item" href="seo.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span><b>SEO и продвижение</b><small>Поиск, аналитика, реклама</small></span></a><a class="m-item" href="design.html" style="--ic:#a78bfa"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z"/></svg></span><span><b>UI/UX дизайн</b><small>Figma, фирменный стиль</small></span></a><a class="m-item" href="ai.html" style="--ic:#c084fc"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/></svg></span><span><b>ИИ-сайты</b><small>Сайт $150 · магазин $300</small></span></a><a class="m-item" href="reviews.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span><b>Revika</b><small>Отзывы с карт на вашем сайте</small></span></a></div></details>
-    <a href="#cases">Кейсы</a><a href="marketplace.html">Маркетплейс</a>
+    <details class="m-sub"><summary>Услуги <svg class="dd-caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></summary><div class="m-sub-list"><a class="m-item" href="web.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span><span><b>Сайты под ключ</b><small>Лендинги и корпоративные сайты</small></span></a><a class="m-item" href="shop.html" style="--ic:#38bdf8"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M5 7h14l-1.5 9h-11z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></span><span><b>Интернет-магазины</b><small>Каталог, корзина, оплата</small></span></a><a class="m-item" href="crm.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 7l3 3M17 17l-3-3"/></svg></span><span><b>CRM-системы</b><small>Своя CRM любой сложности, Bitrix24, amoCRM</small></span></a><a class="m-item" href="accounting.html" style="--ic:#3fe0b0"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h8M8 17h5"/></svg></span><span><b>Подключение бухгалтерии</b><small>Обмен с 1С</small></span></a><a class="m-item" href="bots.html" style="--ic:#b79bff"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="4"/><path d="M12 7V4M9 12h.01M15 12h.01"/></svg></span><span><b>Чат-боты</b><small>Telegram, Viber, чат на сайте</small></span></a><a class="m-item" href="mobile.html" style="--ic:#ff9f6b"><span class="dd-ic"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></span><span><b>Мобильные приложения</b><small>iOS и Android под ваш бизнес</small></span></a><a class="m-item" href="seo.html" style="--ic:#5b7cff"><span class="dd-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span><b>SEO-продвижение</b><small>Вывод сайта в поиск Яндекса и Google</small></span></a><a class="m-item" href="design.html" style="--ic:#a78bfa"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z"/></svg></span><span><b>UI/UX дизайн</b><small>Figma, фирменный стиль</small></span></a><a class="m-item" href="ai.html" style="--ic:#c084fc"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/></svg></span><span><b>ИИ-сайты</b><small>Сайт $150 · магазин $300</small></span></a><a class="m-item" href="reviews.html" style="--ic:#ffc24b"><span class="dd-ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span><b>Revika</b><small>Отзывы с карт на вашем сайте</small></span></a></div></details>
+    <a href="cases.html">Кейсы</a><a href="marketplace.html">Маркетплейс</a>
     <a href="ai.html">ИИ-сайты <small>от $150</small></a>
     <a href="about.html">О нас</a>
     <a href="blog.html">Блог</a>
     <a href="contacts.html">Контакты</a>
     <a class="m-revika" href="reviews.html">★ Revika · отзывы на сайт</a>
+    <a class="m-crm" href="crm-primer.html">CRM · своя система</a>
     <a class="btn" href="#contact" data-quick>Обсудить проект <span aria-hidden="true">→</span></a>
   </div>
 </header>
@@ -848,8 +856,8 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
 
   <div class="ticker-wrap"><div class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>Сайты</span><span>Интернет-магазины</span><span>Приложения</span><span>CRM</span><span>Чат-боты</span><span>1С и бухгалтерия</span><span>SEO</span><span>Яндекс Директ</span><span>Google Ads</span><span>Фирменный стиль</span><span>Бизнес-анализ</span><span>Дата-аналитика</span><span>Revika</span>
-      <span>Сайты</span><span>Интернет-магазины</span><span>Приложения</span><span>CRM</span><span>Чат-боты</span><span>1С и бухгалтерия</span><span>SEO</span><span>Яндекс Директ</span><span>Google Ads</span><span>Фирменный стиль</span><span>Бизнес-анализ</span><span>Дата-аналитика</span><span>Revika</span>
+      <span>Сайты</span><span>Интернет-магазины</span><span>Приложения</span><span>CRM</span><span>Чат-боты</span><span>1С и бухгалтерия</span><span>SEO</span><span>Фирменный стиль</span><span>Бизнес-анализ</span><span>Дата-аналитика</span><span>Revika</span>
+      <span>Сайты</span><span>Интернет-магазины</span><span>Приложения</span><span>CRM</span><span>Чат-боты</span><span>1С и бухгалтерия</span><span>SEO</span><span>Фирменный стиль</span><span>Бизнес-анализ</span><span>Дата-аналитика</span><span>Revika</span>
     </div>
   </div></div>
 
@@ -905,10 +913,17 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
           <div class="tags"><span class="tag">Telegram</span><span class="tag">Viber</span></div>
           <span class="open-hint">Подробнее <span>→</span></span>
         </a>
+        <a class="svc reveal" href="mobile.html" style="--c:#ff9f6b">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
+          <h3>Мобильные приложения</h3>
+          <p>Приложения для iOS и Android: для клиентов, сотрудников и вашей CRM.</p>
+          <div class="tags"><span class="tag">iOS</span><span class="tag">Android</span></div>
+          <span class="open-hint">Подробнее <span>→</span></span>
+        </a>
         <a class="svc reveal" href="seo.html" style="--c:var(--accent)">
           <div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5M8.5 12.5l2-2 1.5 1.5 2.5-3"/></svg></div>
-          <h3>SEO и продвижение</h3>
-          <p>Выводим сайт в поиск Яндекса и Google, настраиваем аналитику и рекламу.</p>
+          <h3>SEO-продвижение</h3>
+          <p>Выводим сайт в поиск Яндекса и Google и приводим клиентов из поиска.</p>
           <div class="tags"><span class="tag">SEO</span><span class="tag">Метрика</span></div>
           <span class="open-hint">Подробнее <span>→</span></span>
         </a>
@@ -1065,8 +1080,7 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
         <div>
           <div class="sec-label">CRM любой сложности</div>
           <h2>Делаем <em>свои CRM</em></h2>
-          <p>Договоры, учёт денег, зарплаты, партнёрские программы, роли и права — собираем систему под ваши процессы. Подключение от $300.</p>
-          <div class="crm-tz-tags"><span>Конструктор договоров</span><span>Права по разделам</span><span>Журнал изменений</span></div>
+          <p>Собираем CRM под все потребности: договоры, учёт денег, зарплаты, роли и права, чаты с сотрудниками. Наша сборка — $300, индивидуальная разработка — от $1 500.</p>
           <span class="btn">Посмотреть пример <span aria-hidden="true">→</span></span>
         </div>
         <div class="crm-tz-shot"><div class="crm-tz-bar"><i></i><i></i><i></i><span>CRM · Договоры</span></div><img src="img/crm/contracts.webp" alt="Пример нашей CRM: конструктор договоров" width="1400" height="855" loading="lazy" decoding="async"></div>
@@ -1144,10 +1158,10 @@ dialog.modal.closing{animation:modal-out .25s ease forwards}
 <footer lang="ru">
   <div class="wrap row">
     <span>© 2026 itsme.by · Веб-студия</span>
-    <span class="legal"><a href="privacy.html">Политика конфиденциальности</a><a href="cookies.html">Cookie</a><a href="terms.html">Пользовательское соглашение</a><a href="about.html">О нас</a><a href="contacts.html">Контакты</a><a href="blog.html">Блог</a><a href="reviews.html">★ Revika</a></span>
+    <span class="legal"><a href="privacy.html">Политика конфиденциальности</a><a href="cookies.html">Cookie</a><a href="terms.html">Пользовательское соглашение</a></span>
   </div>
   <div class="wrap"><div class="wordmark" aria-hidden="true">itsme</div></div>
-</footer>
+<div class="wrap"><div class="f-contacts"><a href="tel:+375291653052">+375 29 165-30-52</a><a href="mailto:hello@itsme.by">hello@itsme.by</a><a href="https://t.me/alexanderzhilach" target="_blank" rel="noopener">Telegram</a><a href="https://max.ru/u/f9LHodD0cOIC1ykP9E8yR5FU4hH5XPT8cXQweJvMDvUj7GxMumqct4l8rJM" target="_blank" rel="noopener">MAX</a><span class="f-req">Жилач Александр Сергеевич · плательщик НПД · УНП ME6559955</span></div></div></footer>
 
 <dialog class="modal" id="m-svc" aria-labelledby="m-svc-title">
   <div class="m-box">
@@ -1375,7 +1389,7 @@ const SVC={
   crm:{c:'var(--sun)',t:'CRM-системы',l:'Разрабатываем собственные CRM с нуля или внедряем Bitrix24 и amoCRM. Все заявки и клиенты в одном окне.',i:['Разработка своей CRM под ваши процессы','Внедрение Bitrix24 или amoCRM','Воронки продаж под ваш процесс','Заявки с сайта, мессенджеров и звонков','Автоматические задачи и напоминания','Обучение команды'],time:'от 1 недели',f:'отделы продаж, логистика, сервисы',chip:'k5'},
   acc:{c:'var(--mint)',t:'Подключение бухгалтерии',l:'Сайт, магазин и CRM обмениваются данными с 1С без ручного ввода.',i:['Обмен товарами, ценами и остатками','Заказы с сайта сразу в 1С','Счета и акты из CRM','Настройка расписания обмена','Проверка и сопровождение'],time:'от 1 недели',f:'магазины, услуги',chip:'k4'},
   bot:{c:'var(--lilac)',t:'Чат-боты',l:'Бот отвечает клиентам, принимает заказы и записывает на услуги круглосуточно.',i:['Боты в Telegram, Viber и онлайн-чат на сайте','Ответы на частые вопросы','Приём заказов и запись на время','Передача диалога живому менеджеру','Связь с CRM'],time:'от 1 недели',f:'салоны, кафе, магазины',chip:'k6'},
-  seo:{c:'var(--accent)',t:'SEO и продвижение',l:'Выводим сайт в поиск и приводим клиентов из Яндекса и Google.',i:['Аудит сайта и конкурентов','Подбор запросов и оптимизация страниц','Яндекс Метрика и Google Analytics','Настройка рекламы','Ежемесячный отчёт и поддержка сайта'],time:'от 1 месяца',f:'любой бизнес',chip:'k7'},
+  seo:{c:'var(--accent)',t:'SEO-продвижение',l:'Выводим сайт в поиск и приводим клиентов из Яндекса и Google.',i:['Аудит сайта и конкурентов','Подбор запросов и оптимизация страниц','Яндекс Метрика и Google Analytics','Ссылки, карты и репутация','Ежемесячный отчёт и поддержка сайта'],time:'от 1 месяца',f:'любой бизнес',chip:'k7'},
   ux:{c:'var(--pink)',t:'UI/UX дизайн',l:'Продумываем путь клиента до заявки и рисуем интерфейс в Figma.',i:['Исследование и структура','Кликабельный прототип','Дизайн всех экранов','UI-кит и дизайн-система','Передача макетов разработчикам'],time:'от 1 недели',f:'сайты, приложения',chip:'k4'},
   revika:{c:'var(--sun)',t:'Revika',l:'Наш сервис: настоящие отзывы с Яндекс Карт, Google и 2ГИС прямо на вашем сайте.',i:['Отзывы обновляются автоматически','Виджет в стиле вашего сайта','Ссылка на источник у каждого отзыва','Звёзды рейтинга в поиске','Подключение одной строкой кода'],time:'5 минут',f:'кафе, салоны, магазины',chip:'k8',page:'reviews.html'}
 };
