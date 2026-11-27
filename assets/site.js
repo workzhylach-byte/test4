@@ -33,7 +33,7 @@
   }
 
   const dlg=document.createElement('dialog');dlg.className='lm';dlg.setAttribute('aria-labelledby','lm-t');
-  dlg.innerHTML=`<div class="lm-box"><button class="lm-x" type="button" aria-label="Закрыть">✕</button>
+  dlg.innerHTML=`<div class="lm-box"><button class="lm-x" type="button" aria-label="Закрыть"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button>
     <div class="lm-step"><div class="lm-head"><h3 id="lm-t">Обсудим проект?</h3><p class="lm-sub">Расскажите о задаче — ответим в течение рабочего дня с идеями и оценкой.</p></div><form novalidate>${formHtml()}</form></div>
     <div class="lm-done" hidden><div class="big">🎉</div><h3>Заявка отправлена!</h3><p class="lm-done-t"></p><button class="btn lm-send lm-ok" type="button">Отлично</button></div></div>`;
   document.body.append(dlg);
@@ -87,4 +87,13 @@
   // ---------- reading progress (article) ----------
   const rp=document.querySelector('.read-progress'),art=document.querySelector('.article');
   if(rp&&art){const u=()=>{const r=art.getBoundingClientRect(),t=r.height-innerHeight;rp.style.transform=`scaleX(${Math.min(1,Math.max(0,t>0?-r.top/t:1))})`;};addEventListener('scroll',u,{passive:true});u();}
+})();
+
+// custom cursor lives under the page, so it cannot draw over an open <dialog> (top layer): show the normal cursor while any dialog is open
+(function(){
+  const root=document.documentElement;
+  const sync=()=>{const open=!!document.querySelector('dialog[open]');root.classList.toggle('dlg-open',open);if(window.__cursorOn)root.classList.toggle('has-cursor',!open);};
+  const mo=new MutationObserver(sync);
+  const watch=()=>document.querySelectorAll('dialog').forEach(d=>{if(!d.__w){d.__w=1;mo.observe(d,{attributes:true,attributeFilter:['open']});}});
+  watch();new MutationObserver(watch).observe(document.body,{childList:true});
 })();
